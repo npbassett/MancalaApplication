@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MancalaApplication</string>
+    <string name="board_button_text">move stones</string>
 </resources>
