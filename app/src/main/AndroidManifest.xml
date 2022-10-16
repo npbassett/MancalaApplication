@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MancalaApplication"
         tools:targetApi="31">
         <activity
-            android:name=".MancalaActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
