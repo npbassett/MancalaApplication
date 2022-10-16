@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">MancalaApplication</string>
+    <string name="app_name">Mancala</string>
     <string name="board_button_text">move stones</string>
+    <string name="stones">%d</string>
 </resources>
