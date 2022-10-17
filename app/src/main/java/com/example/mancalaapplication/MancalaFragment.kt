@@ -112,20 +112,24 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
         }
         // if selected pocket is on the wrong side of the board, prompt user ot pick another pocket
         if (pocket in otherplayersPockets) {
-            Snackbar.make(
-                binding.btnPocket1.rootView.findViewById(R.id.coordinatorLayout),
-                R.string.wrong_side_snackbar,
-                Snackbar.LENGTH_SHORT
-            ).show()
+            activity?.let { it ->
+                Snackbar.make(
+                    it.findViewById(R.id.coordinatorLayout),
+                    R.string.wrong_side_snackbar,
+                    Snackbar.LENGTH_SHORT
+                ).setAction(R.string.dismiss) {}
+            }?.show()
             return
         }
         // if selected pocket is empty, prompt user to pick another pocket
         if (mancalaModel.pocketStones[pocket] == 0) {
-            Snackbar.make(
-                binding.btnPocket1.rootView.findViewById(R.id.coordinatorLayout),
-                R.string.pocket_empty_snackbar,
-                Snackbar.LENGTH_SHORT
-            ).show()
+            activity?.let { it ->
+                Snackbar.make(
+                    it.findViewById(R.id.coordinatorLayout),
+                    R.string.pocket_empty_snackbar,
+                    Snackbar.LENGTH_SHORT
+                ).setAction(R.string.dismiss) {}
+            }?.show()
             return
         }
         var numStonesToMove: Int = mancalaModel.pocketStones[pocket]

@@ -8,4 +8,5 @@
     <string name="play_again">Play again</string>
     <string name="wrong_side_snackbar">Please choose a pocket on the correct side of the board.</string>
     <string name="pocket_empty_snackbar">Pocket is empty. Please choose another pocket.</string>
+    <string name="dismiss">DISMISS</string>
 </resources>
