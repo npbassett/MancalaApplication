@@ -1,7 +1,7 @@
 package com.example.mancalaapplication
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +15,6 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
 
     private val viewModel: MancalaViewModel by viewModels()
 
-    //private var mancalaModel = MancalaModel()
-
     private lateinit var binding: MancalaFragmentBinding
 
     override fun onCreateView(
@@ -24,18 +22,12 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
     ): View {
         // Inflate the layout XML file and return a binding object instance
         binding = MancalaFragmentBinding.inflate(inflater, container, false)
-        Log.d("MancalaFragment", "MancalaFragment created/re-created!")
         return binding.root
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("MancalaFragment", "MancalaFragment destroyed!")
     }
 
     private fun updateDisplay() {
         binding.tvPlayersTurn.text = if (viewModel.player1Turn) "Player 1's turn"
-        else "Player 2's turn"
+            else "Player 2's turn"
         binding.tvPocket0.text = getString(R.string.stones, viewModel.pocketStones[0])
         binding.tvPocket1.text = getString(R.string.stones, viewModel.pocketStones[1])
         binding.tvPocket2.text = getString(R.string.stones, viewModel.pocketStones[2])
@@ -108,13 +100,17 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
     private fun showWinnerDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
-            .setMessage(getString(R.string.winner, if (viewModel.checkPlayer1Winner()) "Player 1" else "Player2"))
+            .setMessage(getString(R.string.winner,
+                if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2"))
             .setCancelable(false)
             .setPositiveButton(getString(R.string.play_again)) { _, _ ->
                 run {
                     viewModel.restartGame()
                     updateDisplay()
                 }
+            }
+            .setNegativeButton(R.string.exit) { _, _ ->
+                startActivity(Intent(activity, DashboardActivity::class.java))
             }
             .show()
     }
