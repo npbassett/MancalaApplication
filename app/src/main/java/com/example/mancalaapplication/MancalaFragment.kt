@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mancalaapplication.databinding.MancalaFragmentBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MancalaFragment : Fragment(R.layout.mancala_fragment) {
 
@@ -60,16 +61,45 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
         binding.tvPocket13.text = getString(R.string.stones, mancalaModel.pocketStones[13])
     }
 
-    private fun oppositePocket(pocket: Int): Int? {
-        return if (pocket != 6 && pocket != 13) {
-            12 - pocket
-        } else {
-            null
+    private fun checkBottomEmpty(): Boolean {
+        for (i in 0..5) {
+            if (mancalaModel.pocketStones[i] != 0) {
+                return false
+            }
         }
+        return true
+    }
+
+    private fun checkTopEmpty(): Boolean {
+        for (i in 7..12) {
+            if (mancalaModel.pocketStones[i] != 0) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun checkPlayer1Winner(): Boolean {
+        return mancalaModel.pocketStones[6] > mancalaModel.pocketStones[13]
+    }
+
+    private fun restartGame() {
+        mancalaModel = MancalaModel()
+        updateDisplay()
+    }
+
+    private fun showWinnerDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.congratulations))
+            .setMessage(getString(R.string.winner, if (checkPlayer1Winner()) "Player 1" else "Player2"))
+            .setCancelable(false)
+            .setPositiveButton(getString(R.string.play_again)) { _, _ -> restartGame() }
+            .show()
     }
 
     private fun moveStones(pocket: Int) {
         val playersStore = if (mancalaModel.player1Turn) 6 else 13
+        val otherPlayersStore = if (mancalaModel.player1Turn) 13 else 6
         val playersPockets = if (mancalaModel.player1Turn) {
             mutableListOf(0, 1, 2, 3, 4, 5)
         } else {
@@ -80,6 +110,9 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
         var currentPocket = pocket + 1
         // distribute stones into pockets
         while (numStonesToMove > 0) {
+            if (currentPocket == otherPlayersStore) {
+                currentPocket = (currentPocket + 1) % 14
+            }
             mancalaModel.pocketStones[currentPocket]++
             currentPocket = (currentPocket + 1) % 14
             numStonesToMove--
@@ -100,5 +133,28 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
             !mancalaModel.player1Turn
         } else mancalaModel.player1Turn
         updateDisplay()
+        if (checkTopEmpty() || checkBottomEmpty()) {
+            for (i in 0..5) {
+                mancalaModel.pocketStones[6] += mancalaModel.pocketStones[i]
+                mancalaModel.pocketStones[i] = 0
+            }
+            for (i in 7..12) {
+                mancalaModel.pocketStones[13] += mancalaModel.pocketStones[i]
+                mancalaModel.pocketStones[i] = 0
+            }
+            mancalaModel.gameOver = true
+            updateDisplay()
+        }
+        if (mancalaModel.gameOver) {
+            showWinnerDialog()
+        }
+    }
+
+    private fun oppositePocket(pocket: Int): Int? {
+        return if (pocket == 6 || pocket == 13) {
+            null
+        } else {
+            12 - pocket
+        }
     }
 }

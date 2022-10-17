@@ -2,4 +2,8 @@
     <string name="app_name">Mancala</string>
     <string name="board_button_text">move stones</string>
     <string name="stones">%d</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="winner">%s is the winner!</string>
+    <string name="exit">Exit</string>
+    <string name="play_again">Play again</string>
 </resources>
