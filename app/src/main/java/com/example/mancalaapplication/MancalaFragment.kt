@@ -1,13 +1,13 @@
 package com.example.mancalaapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mancalaapplication.databinding.MancalaFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class MancalaFragment : Fragment(R.layout.mancala_fragment) {
 
@@ -105,6 +105,29 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
         } else {
             mutableListOf(7, 8, 9, 10, 11, 12)
         }
+        val otherplayersPockets = if (mancalaModel.player1Turn) {
+            mutableListOf(7, 8, 9, 10, 11, 12)
+        } else {
+            mutableListOf(0, 1, 2, 3, 4, 5)
+        }
+        // if selected pocket is on the wrong side of the board, prompt user ot pick another pocket
+        if (pocket in otherplayersPockets) {
+            Snackbar.make(
+                binding.btnPocket1.rootView.findViewById(R.id.coordinatorLayout),
+                R.string.wrong_side_snackbar,
+                Snackbar.LENGTH_SHORT
+            ).show()
+            return
+        }
+        // if selected pocket is empty, prompt user to pick another pocket
+        if (mancalaModel.pocketStones[pocket] == 0) {
+            Snackbar.make(
+                binding.btnPocket1.rootView.findViewById(R.id.coordinatorLayout),
+                R.string.pocket_empty_snackbar,
+                Snackbar.LENGTH_SHORT
+            ).show()
+            return
+        }
         var numStonesToMove: Int = mancalaModel.pocketStones[pocket]
         mancalaModel.pocketStones[pocket] = 0
         var currentPocket = pocket + 1
@@ -117,9 +140,7 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
             currentPocket = (currentPocket + 1) % 14
             numStonesToMove--
         }
-        Log.d("MancalaFragment", "$currentPocket")
         val lastPocket = if (currentPocket == 0) 13 else currentPocket - 1
-        Log.d("MancalaFragment", "$lastPocket")
         // check if last stone ends in empty pocket on player's own side. If so, move all stones
         // in opposite pocket to player's store.
         val lastPocketOpposite = oppositePocket(lastPocket)
