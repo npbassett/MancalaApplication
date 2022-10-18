@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -117,24 +116,21 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             viewModel.moveStones(pocket)
             updateDisplay()
             if (viewModel.gameOver) showWinnerDialog()
-            // wait for 1 second before executing AI move.
-            // TODO: disable buttons during MancalaBot's turn
+            // wait for 2 seconds and disable buttons before executing AI move.
+            disableButtons()
             Handler(Looper.getMainLooper()).postDelayed(
                 {
                     while (!viewModel.player1Turn && !viewModel.gameOver) {
-                        Log.d("SinglePlayer", "AI move")
                         viewModel.aiMoveStones()
                         updateDisplay()
                         if (viewModel.gameOver) showWinnerDialog()
                     }
-                },
-                1000
-            )
+                    enableButtons()
+                }, 2000)
         }
     }
 
     private fun showWinnerDialog() {
-        Log.d("SinglePlayer", "running showWinnerDialog...")
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.winner,
@@ -150,5 +146,36 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
                 startActivity(Intent(activity, DashboardActivity::class.java))
             }
             .show()
+    }
+
+    private fun disableButtons() {
+        binding.btnPocket0.isEnabled = false
+        binding.btnPocket1.isEnabled = false
+        binding.btnPocket2.isEnabled = false
+        binding.btnPocket3.isEnabled = false
+        binding.btnPocket4.isEnabled = false
+        binding.btnPocket5.isEnabled = false
+        binding.btnPocket7.isEnabled = false
+        binding.btnPocket8.isEnabled = false
+        binding.btnPocket9.isEnabled = false
+        binding.btnPocket10.isEnabled = false
+        binding.btnPocket11.isEnabled = false
+        binding.btnPocket12.isEnabled = false
+
+    }
+
+    private fun enableButtons() {
+        binding.btnPocket0.isEnabled = true
+        binding.btnPocket1.isEnabled = true
+        binding.btnPocket2.isEnabled = true
+        binding.btnPocket3.isEnabled = true
+        binding.btnPocket4.isEnabled = true
+        binding.btnPocket5.isEnabled = true
+        binding.btnPocket7.isEnabled = true
+        binding.btnPocket8.isEnabled = true
+        binding.btnPocket9.isEnabled = true
+        binding.btnPocket10.isEnabled = true
+        binding.btnPocket11.isEnabled = true
+        binding.btnPocket12.isEnabled = true
     }
 }
