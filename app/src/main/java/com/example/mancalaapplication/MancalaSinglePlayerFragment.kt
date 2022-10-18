@@ -3,6 +3,9 @@ package com.example.mancalaapplication
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -114,14 +117,24 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             viewModel.moveStones(pocket)
             updateDisplay()
             if (viewModel.gameOver) showWinnerDialog()
-            //TODO: wait for 1 second before executing move.
-            viewModel.aiMoveStones()
-            updateDisplay()
-            if (viewModel.gameOver) showWinnerDialog()
+            // wait for 1 second before executing AI move.
+            // TODO: disable buttons during MancalaBot's turn
+            Handler(Looper.getMainLooper()).postDelayed(
+                {
+                    while (!viewModel.player1Turn && !viewModel.gameOver) {
+                        Log.d("SinglePlayer", "AI move")
+                        viewModel.aiMoveStones()
+                        updateDisplay()
+                        if (viewModel.gameOver) showWinnerDialog()
+                    }
+                },
+                1000
+            )
         }
     }
 
     private fun showWinnerDialog() {
+        Log.d("SinglePlayer", "running showWinnerDialog...")
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.winner,

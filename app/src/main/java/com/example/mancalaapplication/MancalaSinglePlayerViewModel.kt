@@ -123,9 +123,5 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     private fun aiMoveStonesEasy() {
         val randomPocket = (7..12).random()
         if (_pocketStones[randomPocket] != 0) moveStones(randomPocket) else aiMoveStonesEasy()
-        if (!_player1Turn) {
-            //TODO: wait for 1 second before executing move.
-            aiMoveStonesEasy()
-        }
     }
 }
