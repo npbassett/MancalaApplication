@@ -1,5 +1,6 @@
 package com.example.mancalaapplication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +14,27 @@ import com.google.android.material.snackbar.Snackbar
 
 class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
 
+    companion object {
+        fun newInstance(aiDifficulty: String): MancalaSinglePlayerFragment {
+            val fragment = MancalaSinglePlayerFragment()
+            val args = Bundle()
+            args.putString("AI difficulty", aiDifficulty)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     private val viewModel: MancalaSinglePlayerViewModel by viewModels()
+
+    private lateinit var aiDifficulty: String
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        arguments?.getString("AI difficulty")?.let {
+            aiDifficulty = it
+        }
+        viewModel.aiDifficulty = aiDifficulty
+    }
 
     private lateinit var binding: MancalaFragmentBinding
 

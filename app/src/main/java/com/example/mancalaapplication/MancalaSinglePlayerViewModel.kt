@@ -3,7 +3,13 @@ package com.example.mancalaapplication
 import androidx.lifecycle.ViewModel
 
 class MancalaSinglePlayerViewModel : ViewModel() {
-    private val _aiDifficulty = "easy"
+    var aiDifficulty = ""
+        set(value) {
+            (if (value in listOf("easy", "intermediate", "hard")) value
+                else throw java.lang.IllegalArgumentException(
+                "Difficulty must be either easy, intermediate, or hard.")).also { field = it }
+        }
+
     private var _pocketStones = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
     private var _player1Turn = true
     private var _gameOver = false
@@ -110,7 +116,7 @@ class MancalaSinglePlayerViewModel : ViewModel() {
 
     fun aiMoveStones() {
         if (!_player1Turn) {
-            if (_aiDifficulty == "easy") aiMoveStonesEasy()
+            if (aiDifficulty == "easy") aiMoveStonesEasy()
         }
     }
 

@@ -17,7 +17,6 @@ class DashboardActivity: AppCompatActivity() {
         btnBeginMultiplayer.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("game mode", "multiplayer")
-            intent.putExtra("AI difficulty", "")
             startActivity(intent)
         }
 
