@@ -84,7 +84,19 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
         return
     }
 
+    private fun moveAgainSnackbar() {
+        activity?.let { it ->
+            Snackbar.make(
+                it.findViewById(R.id.mainActivityCoordinatorLayout),
+                R.string.move_again_snackbar,
+                Snackbar.LENGTH_SHORT
+            ).setAction(R.string.dismiss) {}
+        }?.show()
+        return
+    }
+
     private fun onButtonClick(pocket: Int) {
+        val beforePlayer1Turn = viewModel.player1Turn
         if (viewModel.pocketWrongSide(pocket)) {
             wrongSideSnackbar()
         } else if (viewModel.pocketEmpty(pocket)) {
@@ -94,6 +106,7 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
             updateDisplay()
             if (viewModel.gameOver) showWinnerDialog()
         }
+        if (beforePlayer1Turn == viewModel.player1Turn) moveAgainSnackbar()
     }
 
     private fun showWinnerDialog() {

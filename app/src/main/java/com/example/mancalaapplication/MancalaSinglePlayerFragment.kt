@@ -107,6 +107,17 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         return
     }
 
+    private fun moveAgainSnackbar() {
+        activity?.let { it ->
+            Snackbar.make(
+                it.findViewById(R.id.mainActivityCoordinatorLayout),
+                R.string.move_again_snackbar,
+                Snackbar.LENGTH_SHORT
+            ).setAction(R.string.dismiss) {}
+        }?.show()
+        return
+    }
+
     private fun onButtonClick(pocket: Int) {
         if (viewModel.pocketWrongSide(pocket)) {
             wrongSideSnackbar()
@@ -117,35 +128,45 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             updateDisplay()
             if (viewModel.gameOver) showWinnerDialog()
             // wait for 2 seconds and disable buttons before executing AI move.
-            disableButtons()
-            Handler(Looper.getMainLooper()).postDelayed(
-                {
-                    while (!viewModel.player1Turn && !viewModel.gameOver) {
-                        viewModel.aiMoveStones()
-                        updateDisplay()
-                        if (viewModel.gameOver) showWinnerDialog()
-                    }
-                    enableButtons()
-                }, 2000)
+            if (!viewModel.player1Turn) {
+                disableButtons()
+                Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        while (!viewModel.player1Turn && !viewModel.gameOver) {
+                            viewModel.aiMoveStones()
+                            updateDisplay()
+                            if (viewModel.gameOver) showWinnerDialog()
+                        }
+                        enableButtons()
+                    }, 2000
+                )
+            } else {
+                moveAgainSnackbar()
+            }
         }
     }
 
     private fun showWinnerDialog() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.congratulations))
-            .setMessage(getString(R.string.winner,
-                if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2"))
-            .setCancelable(false)
-            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            if (viewModel.checkPlayer1Winner()) {
+                setTitle(getString(R.string.congratulations))
+                setMessage(R.string.you_win)
+            } else {
+                setTitle(R.string.better_luck)
+                setMessage(R.string.mancalabot_won)
+            }
+            setCancelable(false)
+            setPositiveButton(getString(R.string.play_again)) { _, _ ->
                 run {
                     viewModel.restartGame()
                     updateDisplay()
                 }
             }
-            .setNegativeButton(R.string.exit) { _, _ ->
+            setNegativeButton(R.string.exit) { _, _ ->
                 startActivity(Intent(activity, DashboardActivity::class.java))
             }
-            .show()
+            show()
+        }
     }
 
     private fun disableButtons() {
