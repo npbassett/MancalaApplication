@@ -9,5 +9,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+
+        val gameMode = intent.getStringExtra("game mode").toString()
+        val aiDifficulty = intent.getStringExtra("AI difficulty").toString()
+
+        val fragment = if (gameMode == "multiplayer") MancalaMultiplayerFragment()
+            else MancalaSinglePlayerFragment()
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.mancala_fragment_container, fragment)
+            commit()
+        }
     }
 }

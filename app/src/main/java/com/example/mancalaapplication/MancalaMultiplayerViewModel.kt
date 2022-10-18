@@ -2,7 +2,7 @@ package com.example.mancalaapplication
 
 import androidx.lifecycle.ViewModel
 
-class MancalaViewModel : ViewModel() {
+class MancalaMultiplayerViewModel : ViewModel() {
     private var _pocketStones = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
     private var _player1Turn = true
     private var _gameOver = false
@@ -43,11 +43,6 @@ class MancalaViewModel : ViewModel() {
         } else {
             mutableListOf(7, 8, 9, 10, 11, 12)
         }
-        //val otherPlayersPockets = if (_player1Turn) {
-        //    mutableListOf(7, 8, 9, 10, 11, 12)
-        //} else {
-        //    mutableListOf(0, 1, 2, 3, 4, 5)
-        //}
         var numStonesToMove: Int = _pocketStones[pocket]
         _pocketStones[pocket] = 0
         var currentPocket = pocket + 1

@@ -2,6 +2,9 @@
     <string name="app_name">Mancala</string>
     <string name="welcome">Welcome to Mancala!</string>
     <string name="dashboard_multiplayer_button">Begin multiplayer game</string>
+    <string name="easy">Easy</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="hard">Hard</string>
     <string name="board_button_text">move stones</string>
     <string name="stones">%d</string>
     <string name="congratulations">Congratulations!</string>

@@ -11,16 +11,15 @@ import com.example.mancalaapplication.databinding.MancalaFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-class MancalaFragment : Fragment(R.layout.mancala_fragment) {
+class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
 
-    private val viewModel: MancalaViewModel by viewModels()
+    private val viewModel: MancalaMultiplayerViewModel by viewModels()
 
     private lateinit var binding: MancalaFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout XML file and return a binding object instance
         binding = MancalaFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -66,7 +65,7 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
     private fun wrongSideSnackbar() {
         activity?.let { it ->
             Snackbar.make(
-                it.findViewById(R.id.coordinatorLayout),
+                it.findViewById(R.id.mainActivityCoordinatorLayout),
                 R.string.pocket_wrong_side_snackbar,
                 Snackbar.LENGTH_SHORT
             ).setAction(R.string.dismiss) {}
@@ -77,7 +76,7 @@ class MancalaFragment : Fragment(R.layout.mancala_fragment) {
     private fun emptyPocketSnackbar() {
         activity?.let { it ->
             Snackbar.make(
-                it.findViewById(R.id.coordinatorLayout),
+                it.findViewById(R.id.mainActivityCoordinatorLayout),
                 R.string.pocket_empty_snackbar,
                 Snackbar.LENGTH_SHORT
             ).setAction(R.string.dismiss) {}

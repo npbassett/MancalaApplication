@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboardActivityCoordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     tools:context=".DashboardActivity">
 
     <TextView
@@ -14,6 +20,7 @@
         android:textSize="@dimen/welcome_text_size"
         app:layout_constraintBottom_toTopOf="@+id/btnBeginMultiplayer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,9 +29,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dashboard_multiplayer_button"
+        app:layout_constraintBottom_toTopOf="@+id/btnSinglePlayerHard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDashboardWelcome" />
+
+    <TextView
+        android:id="@+id/tvMultiplayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin Multiplayer Game"
+        android:textSize="@dimen/dashboard_game_type_textsize"
+        app:layout_constraintBottom_toTopOf="@+id/btnBeginMultiplayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSinglePlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin Single Player Game"
+        android:textSize="@dimen/dashboard_game_type_textsize"
+        app:layout_constraintBottom_toTopOf="@+id/btnSinglePlayerIntermediate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSinglePlayerEasy"
+        android:layout_width="@dimen/dashboard_single_player_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/easy"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSinglePlayerIntermediate"
+        app:layout_constraintEnd_toStartOf="@+id/btnSinglePlayerIntermediate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSinglePlayerIntermediate"
+        android:layout_width="@dimen/dashboard_single_player_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/intermediate"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSinglePlayerHard"
+        app:layout_constraintEnd_toStartOf="@+id/btnSinglePlayerHard"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSinglePlayerEasy" />
+
+    <Button
+        android:id="@+id/btnSinglePlayerHard"
+        android:layout_width="@dimen/dashboard_single_player_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/hard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSinglePlayerIntermediate"
+        app:layout_constraintTop_toBottomOf="@+id/btnBeginMultiplayer" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
