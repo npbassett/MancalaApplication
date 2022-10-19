@@ -12,48 +12,47 @@
     android:layout_margin="5dp"
     tools:context=".DashboardActivity">
 
-    <TextView
-        android:id="@+id/tvDashboardWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textSize="@dimen/welcome_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/btnBeginMultiplayer"
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="400dp"
+        android:layout_height="190dp"
+        android:src="@drawable/mancala_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logo" />
 
     <Button
         android:id="@+id/btnBeginMultiplayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dashboard_multiplayer_button"
-        app:layout_constraintBottom_toTopOf="@+id/btnSinglePlayerHard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDashboardWelcome" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMultiplayer" />
 
     <TextView
         android:id="@+id/tvMultiplayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin Multiplayer Game"
+        android:text="@string/begin_multiplayer"
         android:textSize="@dimen/dashboard_game_type_textsize"
-        app:layout_constraintBottom_toTopOf="@+id/btnBeginMultiplayer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
     <TextView
         android:id="@+id/tvSinglePlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin Single Player Game"
+        android:text="@string/begin_single_player"
         android:textSize="@dimen/dashboard_game_type_textsize"
-        app:layout_constraintBottom_toTopOf="@+id/btnSinglePlayerIntermediate"
+        android:paddingTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBeginMultiplayer" />
 
     <Button
         android:id="@+id/btnSinglePlayerEasy"
@@ -71,20 +70,21 @@
         android:layout_width="@dimen/dashboard_single_player_button_width"
         android:layout_height="wrap_content"
         android:text="@string/intermediate"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSinglePlayerHard"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         app:layout_constraintEnd_toStartOf="@+id/btnSinglePlayerHard"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSinglePlayerEasy" />
+        app:layout_constraintStart_toEndOf="@+id/btnSinglePlayerEasy"
+        app:layout_constraintTop_toBottomOf="@+id/tvSinglePlayer" />
 
     <Button
         android:id="@+id/btnSinglePlayerHard"
         android:layout_width="@dimen/dashboard_single_player_button_width"
         android:layout_height="wrap_content"
         android:text="@string/hard"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSinglePlayerIntermediate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSinglePlayerIntermediate"
-        app:layout_constraintTop_toBottomOf="@+id/btnBeginMultiplayer" />
+        app:layout_constraintStart_toEndOf="@+id/btnSinglePlayerIntermediate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

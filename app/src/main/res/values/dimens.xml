@@ -3,11 +3,11 @@
     <dimen name="welcome_text_size">40sp</dimen>
     <dimen name="dashboard_game_type_textsize">20sp</dimen>
     <dimen name="dashboard_single_player_button_width">150dp</dimen>
-    <dimen name="board_button_width">75dp</dimen>
+    <dimen name="board_button_width">70dp</dimen>
     <dimen name="board_button_height">120dp</dimen>
-    <dimen name="board_store_height">240dp</dimen>
+    <dimen name="board_store_height">250dp</dimen>
     <dimen name="board_button_text_size">10sp</dimen>
     <dimen name="players_turn_text_size">30sp</dimen>
-    <dimen name="board_button_layout_margin">5dp</dimen>
+    <dimen name="board_button_layout_margin">3dp</dimen>
     <dimen name="board_stone_count_text_size">20sp</dimen>
 </resources>

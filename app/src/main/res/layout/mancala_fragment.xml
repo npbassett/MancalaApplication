@@ -2,336 +2,342 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/board_background">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
 
-    <Button
-        android:id="@+id/btnPocket0"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPocket1"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket13"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket12" />
+        <Button
+            android:id="@+id/btnPocket0"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPocket1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket13"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket12" />
 
-    <Button
-        android:id="@+id/btnPocket1"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnPocket2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket0"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket11" />
+        <Button
+            android:id="@+id/btnPocket1"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPocket2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket0"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket11" />
 
-    <Button
-        android:id="@+id/btnPocket2"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPocket3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket1"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket10" />
+        <Button
+            android:id="@+id/btnPocket2"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPocket3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket1"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket10" />
 
-    <Button
-        android:id="@+id/btnPocket3"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnPocket4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket2"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket9" />
+        <Button
+            android:id="@+id/btnPocket3"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPocket4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket2"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket9" />
 
-    <Button
-        android:id="@+id/btnPocket4"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnPocket5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket3"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket8" />
+        <Button
+            android:id="@+id/btnPocket4"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPocket5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket3"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket8" />
 
-    <Button
-        android:id="@+id/btnPocket5"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnPocket6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket4"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket7" />
+        <Button
+            android:id="@+id/btnPocket5"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPocket6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket4"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket7" />
 
-    <Button
-        android:id="@+id/btnPocket6"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_store_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text=""
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/btnPocket5"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnPocket6"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_store_height"
+            android:text=""
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnPocket5"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnPocket7"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket5"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/btnPocket7"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket5"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket5"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/btnPocket8"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket4"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/btnPocket8"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket4"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket4"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/btnPocket9"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket3"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/btnPocket9"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket3"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket3"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/btnPocket10"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket2"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/btnPocket10"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket2"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket2"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/btnPocket11"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket1"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/btnPocket11"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket1"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket1"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/btnPocket12"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_button_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text="@string/board_button_text"
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket0"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <Button
+            android:id="@+id/btnPocket12"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            android:text="@string/board_button_text"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket0"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket0"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <Button
-        android:id="@+id/btnPocket13"
-        android:layout_width="@dimen/board_button_width"
-        android:layout_height="@dimen/board_store_height"
-        android:backgroundTint="@color/board_pocket"
-        android:text=""
-        android:textSize="@dimen/board_button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnPocket0"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnPocket13"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_store_height"
+            android:text=""
+            android:textSize="@dimen/board_button_text_size"
+            android:layout_margin="@dimen/board_button_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPocket0"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvPocket0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket0"
-        app:layout_constraintStart_toStartOf="@id/btnPocket0"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket0" />
+        <TextView
+            android:id="@+id/tvPocket0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket0"
+            app:layout_constraintStart_toStartOf="@id/btnPocket0"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket0" />
 
-    <TextView
-        android:id="@+id/tvPocket1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket1"
-        app:layout_constraintStart_toStartOf="@id/btnPocket1"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket1" />
+        <TextView
+            android:id="@+id/tvPocket1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket1"
+            app:layout_constraintStart_toStartOf="@id/btnPocket1"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket1" />
 
-    <TextView
-        android:id="@+id/tvPocket2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket2"
-        app:layout_constraintStart_toStartOf="@id/btnPocket2"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket2" />
+        <TextView
+            android:id="@+id/tvPocket2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket2"
+            app:layout_constraintStart_toStartOf="@id/btnPocket2"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket2" />
 
-    <TextView
-        android:id="@+id/tvPocket3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket3"
-        app:layout_constraintStart_toStartOf="@id/btnPocket3"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket3" />
+        <TextView
+            android:id="@+id/tvPocket3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket3"
+            app:layout_constraintStart_toStartOf="@id/btnPocket3"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket3" />
 
-    <TextView
-        android:id="@+id/tvPocket4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket4"
-        app:layout_constraintStart_toStartOf="@id/btnPocket4"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket4" />
+        <TextView
+            android:id="@+id/tvPocket4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket4"
+            app:layout_constraintStart_toStartOf="@id/btnPocket4"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket4" />
 
-    <TextView
-        android:id="@+id/tvPocket5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket5"
-        app:layout_constraintStart_toStartOf="@id/btnPocket5"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket5" />
+        <TextView
+            android:id="@+id/tvPocket5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket5"
+            app:layout_constraintStart_toStartOf="@id/btnPocket5"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket5" />
 
-    <TextView
-        android:id="@+id/tvPocket6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket6"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="@id/btnPocket6"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket6" />
+        <TextView
+            android:id="@+id/tvPocket6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/btnPocket6"
+            app:layout_constraintStart_toStartOf="@+id/btnPocket6"
+            app:layout_constraintTop_toBottomOf="@+id/btnPocket6" />
 
-    <TextView
-        android:id="@+id/tvPocket7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket7"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket7"
-        app:layout_constraintStart_toStartOf="@id/btnPocket7" />
+        <TextView
+            android:id="@+id/tvPocket7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket7"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket7"
+            app:layout_constraintStart_toStartOf="@id/btnPocket7" />
 
-    <TextView
-        android:id="@+id/tvPocket8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket8"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket8"
-        app:layout_constraintStart_toStartOf="@id/btnPocket8" />
+        <TextView
+            android:id="@+id/tvPocket8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket8"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket8"
+            app:layout_constraintStart_toStartOf="@id/btnPocket8" />
 
-    <TextView
-        android:id="@+id/tvPocket9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket9"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket9"
-        app:layout_constraintStart_toStartOf="@id/btnPocket9" />
+        <TextView
+            android:id="@+id/tvPocket9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket9"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket9"
+            app:layout_constraintStart_toStartOf="@id/btnPocket9" />
 
-    <TextView
-        android:id="@+id/tvPocket10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket10"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket10"
-        app:layout_constraintStart_toStartOf="@id/btnPocket10" />
+        <TextView
+            android:id="@+id/tvPocket10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket10"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket10"
+            app:layout_constraintStart_toStartOf="@id/btnPocket10" />
 
-    <TextView
-        android:id="@+id/tvPocket11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket11"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket11"
-        app:layout_constraintStart_toStartOf="@id/btnPocket11" />
+        <TextView
+            android:id="@+id/tvPocket11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket11"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket11"
+            app:layout_constraintStart_toStartOf="@id/btnPocket11" />
 
-    <TextView
-        android:id="@+id/tvPocket12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintBottom_toTopOf="@id/btnPocket12"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket12"
-        app:layout_constraintStart_toStartOf="@id/btnPocket12" />
+        <TextView
+            android:id="@+id/tvPocket12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintBottom_toTopOf="@id/btnPocket12"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket12"
+            app:layout_constraintStart_toStartOf="@id/btnPocket12" />
 
-    <TextView
-        android:id="@+id/tvPocket13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stones"
-        android:textSize="@dimen/board_stone_count_text_size"
-        app:layout_constraintEnd_toEndOf="@id/btnPocket13"
-        app:layout_constraintStart_toStartOf="@id/btnPocket13"
-        app:layout_constraintTop_toBottomOf="@id/btnPocket13" />
+        <TextView
+            android:id="@+id/tvPocket13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stones"
+            android:textSize="@dimen/board_stone_count_text_size"
+            app:layout_constraintEnd_toEndOf="@id/btnPocket13"
+            app:layout_constraintStart_toStartOf="@id/btnPocket13"
+            app:layout_constraintTop_toBottomOf="@id/btnPocket13" />
 
-    <TextView
-        android:id="@+id/tvPlayersTurn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="@dimen/players_turn_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvPlayersTurn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/players_turn_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

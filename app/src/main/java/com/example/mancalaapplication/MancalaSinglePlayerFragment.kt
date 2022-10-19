@@ -147,7 +147,7 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     private fun showWinnerDialog() {
-        MaterialAlertDialogBuilder(requireContext()).apply {
+        MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog).apply {
             if (viewModel.checkPlayer1Winner()) {
                 setTitle(getString(R.string.congratulations))
                 setMessage(R.string.you_win)

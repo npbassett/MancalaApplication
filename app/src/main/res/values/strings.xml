@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Mancala</string>
+    <string name="logo">logo</string>
     <string name="welcome">Welcome to Mancala!</string>
-    <string name="dashboard_multiplayer_button">Begin multiplayer game</string>
+    <string name="begin_multiplayer">Begin Multiplayer Game</string>
+    <string name="dashboard_multiplayer_button">Begin</string>
+    <string name="begin_single_player">Begin Single Player Game</string>
     <string name="easy">Easy</string>
     <string name="intermediate">Intermediate</string>
     <string name="hard">Hard</string>
