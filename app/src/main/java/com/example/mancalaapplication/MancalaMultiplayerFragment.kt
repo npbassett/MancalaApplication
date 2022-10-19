@@ -2,6 +2,7 @@ package com.example.mancalaapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,7 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     private fun wrongSideSnackbar() {
+        Log.d("Multiplayer", "wrong side snackbar")
         activity?.let { it ->
             Snackbar.make(
                 it.findViewById(R.id.mainActivityCoordinatorLayout),
@@ -85,6 +87,7 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     private fun moveAgainSnackbar() {
+        Log.d("Multiplayer", "move again snackbar")
         activity?.let { it ->
             Snackbar.make(
                 it.findViewById(R.id.mainActivityCoordinatorLayout),
@@ -99,8 +102,10 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
         val beforePlayer1Turn = viewModel.player1Turn
         if (viewModel.pocketWrongSide(pocket)) {
             wrongSideSnackbar()
+            return
         } else if (viewModel.pocketEmpty(pocket)) {
             emptyPocketSnackbar()
+            return
         } else {
             viewModel.moveStones(pocket)
             updateDisplay()
