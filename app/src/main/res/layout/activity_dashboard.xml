@@ -12,6 +12,16 @@
     android:layout_margin="5dp"
     tools:context=".DashboardActivity">
 
+    <ImageButton
+        android:id="@+id/btnRules"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/primary"
+        android:src="@drawable/ic_baseline_info_40"
+        android:contentDescription="@string/info"/>
+
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="400dp"

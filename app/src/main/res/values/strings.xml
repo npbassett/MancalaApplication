@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Mancala</string>
     <string name="logo">logo</string>
+    <string name="info">info vector image</string>
     <string name="welcome">Welcome to Mancala!</string>
     <string name="begin_multiplayer">Begin Multiplayer Game</string>
     <string name="dashboard_multiplayer_button">Begin</string>
@@ -21,4 +22,5 @@
     <string name="pocket_empty_snackbar">Pocket is empty. Please choose another pocket.</string>
     <string name="move_again_snackbar">Last stone was placed in your store. Move again!</string>
     <string name="dismiss">DISMISS</string>
+    <string name="lets_play">Let\'s Play!</string>
 </resources>
