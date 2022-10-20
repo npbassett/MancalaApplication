@@ -28,20 +28,20 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
     private fun updateDisplay() {
         binding.tvPlayersTurn.text = if (viewModel.player1Turn) "Player 1's turn"
             else "Player 2's turn"
-        binding.tvPocket0.text = getString(R.string.stones, viewModel.pocketStones[0])
-        binding.tvPocket1.text = getString(R.string.stones, viewModel.pocketStones[1])
-        binding.tvPocket2.text = getString(R.string.stones, viewModel.pocketStones[2])
-        binding.tvPocket3.text = getString(R.string.stones, viewModel.pocketStones[3])
-        binding.tvPocket4.text = getString(R.string.stones, viewModel.pocketStones[4])
-        binding.tvPocket5.text = getString(R.string.stones, viewModel.pocketStones[5])
-        binding.tvPocket6.text = getString(R.string.stones, viewModel.pocketStones[6])
-        binding.tvPocket7.text = getString(R.string.stones, viewModel.pocketStones[7])
-        binding.tvPocket8.text = getString(R.string.stones, viewModel.pocketStones[8])
-        binding.tvPocket9.text = getString(R.string.stones, viewModel.pocketStones[9])
-        binding.tvPocket10.text = getString(R.string.stones, viewModel.pocketStones[10])
-        binding.tvPocket11.text = getString(R.string.stones, viewModel.pocketStones[11])
-        binding.tvPocket12.text = getString(R.string.stones, viewModel.pocketStones[12])
-        binding.tvPocket13.text = getString(R.string.stones, viewModel.pocketStones[13])
+        binding.tvPocket0.text = getString(R.string.stones, viewModel.boardState[0])
+        binding.tvPocket1.text = getString(R.string.stones, viewModel.boardState[1])
+        binding.tvPocket2.text = getString(R.string.stones, viewModel.boardState[2])
+        binding.tvPocket3.text = getString(R.string.stones, viewModel.boardState[3])
+        binding.tvPocket4.text = getString(R.string.stones, viewModel.boardState[4])
+        binding.tvPocket5.text = getString(R.string.stones, viewModel.boardState[5])
+        binding.tvPocket6.text = getString(R.string.stones, viewModel.boardState[6])
+        binding.tvPocket7.text = getString(R.string.stones, viewModel.boardState[7])
+        binding.tvPocket8.text = getString(R.string.stones, viewModel.boardState[8])
+        binding.tvPocket9.text = getString(R.string.stones, viewModel.boardState[9])
+        binding.tvPocket10.text = getString(R.string.stones, viewModel.boardState[10])
+        binding.tvPocket11.text = getString(R.string.stones, viewModel.boardState[11])
+        binding.tvPocket12.text = getString(R.string.stones, viewModel.boardState[12])
+        binding.tvPocket13.text = getString(R.string.stones, viewModel.boardState[13])
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

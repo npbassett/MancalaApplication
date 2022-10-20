@@ -20,6 +20,7 @@
         <item name="android:textColorPrimary">@color/accent</item>
         <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Positive</item>
         <item name="buttonBarNegativeButtonStyle">@style/Alert.Button.Negative</item>
+        <item name="android:colorEdgeEffect">@color/accent</item>
     </style>
 
     <style name="Alert.Button.Positive" parent="Widget.MaterialComponents.Button.OutlinedButton">

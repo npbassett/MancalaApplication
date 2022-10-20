@@ -3,27 +3,27 @@ package com.example.mancalaapplication
 import androidx.lifecycle.ViewModel
 
 class MancalaMultiplayerViewModel : ViewModel() {
-    private var _pocketStones = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
+    private var _boardState = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
     private var _player1Turn = true
     private var _gameOver = false
     private val _player1Pockets = listOf(0, 1, 2, 3, 4, 5)
     private val _player2Pockets = listOf(7, 8, 9, 10, 11, 12)
 
-    val pocketStones: List<Int>
-        get() = _pocketStones.toList()
+    val boardState: List<Int>
+        get() = _boardState.toList()
     val player1Turn: Boolean
         get() = _player1Turn
     val gameOver: Boolean
         get() = _gameOver
 
     fun restartGame() {
-        _pocketStones = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
+        _boardState = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
         _player1Turn = true
         _gameOver = false
     }
 
     fun checkPlayer1Winner(): Boolean {
-        return _pocketStones[6] > _pocketStones[13]
+        return _boardState[6] > _boardState[13]
     }
 
     fun pocketWrongSide(pocket: Int): Boolean {
@@ -32,7 +32,7 @@ class MancalaMultiplayerViewModel : ViewModel() {
     }
 
     fun pocketEmpty(pocket: Int): Boolean {
-        return _pocketStones[pocket] == 0
+        return _boardState[pocket] == 0
     }
 
     fun moveStones(pocket: Int) {
@@ -43,15 +43,15 @@ class MancalaMultiplayerViewModel : ViewModel() {
         } else {
             mutableListOf(7, 8, 9, 10, 11, 12)
         }
-        var numStonesToMove: Int = _pocketStones[pocket]
-        _pocketStones[pocket] = 0
+        var numStonesToMove: Int = _boardState[pocket]
+        _boardState[pocket] = 0
         var currentPocket = pocket + 1
         // distribute stones into pockets
         while (numStonesToMove > 0) {
             if (currentPocket == otherPlayersStore) {
                 currentPocket = (currentPocket + 1) % 14
             }
-            _pocketStones[currentPocket]++
+            _boardState[currentPocket]++
             currentPocket = (currentPocket + 1) % 14
             numStonesToMove--
         }
@@ -59,10 +59,10 @@ class MancalaMultiplayerViewModel : ViewModel() {
         // check if last stone ends in empty pocket on player's own side. If so, move all stones
         // in opposite pocket to player's store.
         val lastPocketOpposite = oppositePocket(lastPocket)
-        if (lastPocket in playersPockets && _pocketStones[lastPocket] == 1
+        if (lastPocket in playersPockets && _boardState[lastPocket] == 1
             && lastPocketOpposite != null) {
-            _pocketStones[playersStore] += _pocketStones[lastPocketOpposite]
-            _pocketStones[lastPocketOpposite] = 0
+            _boardState[playersStore] += _boardState[lastPocketOpposite]
+            _boardState[lastPocketOpposite] = 0
         }
         // check if last stone ends in player's store. If so player gets another turn
         _player1Turn = if (lastPocket != playersStore) {
@@ -70,12 +70,12 @@ class MancalaMultiplayerViewModel : ViewModel() {
         } else _player1Turn
         if (checkTopEmpty() || checkBottomEmpty()) {
             for (i in 0..5) {
-                _pocketStones[6] += _pocketStones[i]
-                _pocketStones[i] = 0
+                _boardState[6] += _boardState[i]
+                _boardState[i] = 0
             }
             for (i in 7..12) {
-                _pocketStones[13] += _pocketStones[i]
-                _pocketStones[i] = 0
+                _boardState[13] += _boardState[i]
+                _boardState[i] = 0
             }
             _gameOver = true
         }
@@ -83,7 +83,7 @@ class MancalaMultiplayerViewModel : ViewModel() {
 
     private fun checkBottomEmpty(): Boolean {
         for (i in 0..5) {
-            if (_pocketStones[i] != 0) {
+            if (_boardState[i] != 0) {
                 return false
             }
         }
@@ -92,7 +92,7 @@ class MancalaMultiplayerViewModel : ViewModel() {
 
     private fun checkTopEmpty(): Boolean {
         for (i in 7..12) {
-            if (_pocketStones[i] != 0) {
+            if (_boardState[i] != 0) {
                 return false
             }
         }

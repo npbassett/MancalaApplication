@@ -20,7 +20,6 @@ class DashboardActivity: AppCompatActivity() {
             showRules()
         }
 
-
         val btnBeginMultiplayer = findViewById<Button>(R.id.btnBeginMultiplayer)
         btnBeginMultiplayer.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -38,13 +37,10 @@ class DashboardActivity: AppCompatActivity() {
 
         val btnSinglePlayerIntermediate = findViewById<Button>(R.id.btnSinglePlayerIntermediate)
         btnSinglePlayerIntermediate.setOnClickListener {
-            //TODO: implement intermediate difficulty AI
-            Snackbar.make(
-                findViewById(R.id.dashboardActivityCoordinatorLayout),
-                "Intermediate difficulty not yet implemented.",
-                Snackbar.LENGTH_SHORT
-                ).setAction(R.string.dismiss) {}
-            .show()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("game mode", "single player")
+            intent.putExtra("AI difficulty", "intermediate")
+            startActivity(intent)
         }
 
         val btnSinglePlayerHard = findViewById<Button>(R.id.btnSinglePlayerHard)
@@ -74,7 +70,7 @@ class DashboardActivity: AppCompatActivity() {
                     "3. If the player's last stone is placed in their own store, the player gets" +
                     " another turn.\n" +
                     "4. If the player's last stone is placed in an empty pocket on their own side," +
-                    "any stones in the opposite pocket are captured and placed in the player's store.\n\n" +
+                    " any stones in the opposite pocket are captured and placed in the player's store.\n\n" +
                     "Ending the Game:\n"+
                     "When all of the pockets on one side of the board are empty, the game is over." +
                     " If a player still has stones on their side of the board when the game ends," +
