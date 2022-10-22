@@ -11,11 +11,13 @@
     <string name="hard">Hard</string>
     <string name="board_button_text">move stones</string>
     <string name="stones">%d</string>
+    <string name="tie">The game ended in a tie.</string>
+    <string name="tie_score">The final score was 24 – 24</string>
     <string name="congratulations">Congratulations!</string>
     <string name="better_luck">Better luck next time…</string>
-    <string name="you_won">You beat MancalaBot!\nThe final score was %d - %d</string>
-    <string name="mancalabot_won">MancalaBot won.\nThe final score was %d - %d</string>
-    <string name="winner">%s is the winner!\nThe final score was %d - %d</string>
+    <string name="you_won">You beat MancalaBot!\nThe final score was %d – %d</string>
+    <string name="mancalabot_won">MancalaBot won.\nThe final score was %d – %d</string>
+    <string name="winner">%s is the winner!\nThe final score was %d – %d</string>
     <string name="exit">Exit</string>
     <string name="play_again">Play again</string>
     <string name="pocket_wrong_side_snackbar">Please choose a pocket on the correct side of the board.</string>

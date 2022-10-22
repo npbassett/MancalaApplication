@@ -126,7 +126,7 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         } else {
             viewModel.applyMove(pocket)
             updateDisplay()
-            if (viewModel.gameOver) showWinnerDialog()
+            if (viewModel.gameOver) showGameOverDialog()
             // wait for 2 seconds and disable buttons before executing AI move.
             if (!viewModel.player1Turn) {
                 disableButtons()
@@ -135,7 +135,7 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
                         while (!viewModel.player1Turn && !viewModel.gameOver) {
                             viewModel.aiMoveStones()
                             updateDisplay()
-                            if (viewModel.gameOver) showWinnerDialog()
+                            if (viewModel.gameOver) showGameOverDialog()
                         }
                         enableButtons()
                     }, 1000
@@ -146,9 +146,12 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         }
     }
 
-    private fun showWinnerDialog() {
+    private fun showGameOverDialog() {
         MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog).apply {
-            if (viewModel.checkPlayer1Winner()) {
+            if (viewModel.checkTie()) {
+                setTitle(R.string.tie)
+                setMessage(R.string.tie_score)
+            } else if (viewModel.checkPlayer1Winner()) {
                 setTitle(getString(R.string.congratulations))
                 setMessage(getString(R.string.you_won, viewModel.boardState[6],
                     viewModel.boardState[13]))

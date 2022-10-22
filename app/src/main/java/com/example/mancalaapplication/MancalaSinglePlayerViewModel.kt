@@ -33,7 +33,11 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     }
 
     fun checkPlayer1Winner(): Boolean {
-        return _boardState[6] > _boardState[13]
+        return boardState[6] > boardState[13]
+    }
+
+    fun checkTie(): Boolean {
+        return boardState[6] == boardState[13]
     }
 
     fun pocketWrongSide(pocket: Int): Boolean {

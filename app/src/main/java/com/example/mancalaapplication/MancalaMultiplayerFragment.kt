@@ -109,27 +109,37 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
         } else {
             viewModel.moveStones(pocket)
             updateDisplay()
-            if (viewModel.gameOver) showWinnerDialog()
+            if (viewModel.gameOver) showGameOverDialog()
         }
         if (beforePlayer1Turn == viewModel.player1Turn) moveAgainSnackbar()
     }
 
-    private fun showWinnerDialog() {
-        MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
-            .setTitle(getString(R.string.congratulations))
-            .setMessage(getString(R.string.winner,
-                if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2",
-                viewModel.boardState[6], viewModel.boardState[13]))
-            .setCancelable(false)
-            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
+    private fun showGameOverDialog() {
+        MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog).apply {
+            if (viewModel.checkTie()) {
+                setTitle(R.string.tie)
+                setMessage(R.string.tie_score)
+            } else {
+                setTitle(getString(R.string.congratulations))
+                setMessage(
+                    getString(
+                        R.string.winner,
+                        if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2",
+                        viewModel.boardState[6], viewModel.boardState[13]
+                    )
+                )
+            }
+            setCancelable(false)
+            setPositiveButton(getString(R.string.play_again)) { _, _ ->
                 run {
                     viewModel.restartGame()
                     updateDisplay()
                 }
             }
-            .setNegativeButton(R.string.exit) { _, _ ->
+            setNegativeButton(R.string.exit) { _, _ ->
                 startActivity(Intent(activity, DashboardActivity::class.java))
             }
-            .show()
+            show()
+        }
     }
 }
