@@ -44,40 +44,14 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return _boardState[pocket] == 0
     }
 
-    fun moveStones(pocket: Int) {
-        val playersStore = if (_player1Turn) 6 else 13
-        val otherPlayersStore = if (_player1Turn) 13 else 6
-        val playersPockets = if (_player1Turn) {
-            listOf(0, 1, 2, 3, 4, 5)
-        } else {
-            listOf(7, 8, 9, 10, 11, 12)
-        }
-        var numStonesToMove: Int = _boardState[pocket]
-        _boardState[pocket] = 0
-        var currentPocket = pocket + 1
-        // distribute stones into pockets
-        while (numStonesToMove > 0) {
-            if (currentPocket == otherPlayersStore) {
-                currentPocket = (currentPocket + 1) % 14
-            }
-            _boardState[currentPocket]++
-            currentPocket = (currentPocket + 1) % 14
-            numStonesToMove--
-        }
-        val lastPocket = if (currentPocket == 0) 13 else currentPocket - 1
-        // check if last stone ends in empty pocket on player's own side. If so, move all stones
-        // in opposite pocket to player's store.
-        val lastPocketOpposite = oppositePocket(lastPocket)
-        if (lastPocket in playersPockets && _boardState[lastPocket] == 1
-            && lastPocketOpposite != null) {
-            _boardState[playersStore] += _boardState[lastPocketOpposite]
-            _boardState[lastPocketOpposite] = 0
-        }
-        // check if last stone ends in player's store. If so player gets another turn
-        _player1Turn = if (lastPocket != playersStore) {
-            !_player1Turn
-        } else _player1Turn
-        if (checkTopEmpty() || checkBottomEmpty()) {
+    fun applyMove(pocket: Int) {
+        val boardStateBeforeMove = boardState.toMutableList()
+        _player1Turn = if (checkMoveAgain(pocket, boardStateBeforeMove)) {
+            player1Turn
+        } else !player1Turn
+        _boardState = moveStones(pocket, boardStateBeforeMove)
+        _gameOver = checkGameOver(boardState)
+        if (gameOver) {
             for (i in 0..5) {
                 _boardState[6] += _boardState[i]
                 _boardState[i] = 0
@@ -86,26 +60,68 @@ class MancalaSinglePlayerViewModel : ViewModel() {
                 _boardState[13] += _boardState[i]
                 _boardState[i] = 0
             }
-            _gameOver = true
         }
     }
 
-    private fun checkBottomEmpty(): Boolean {
+    private fun moveStones(pocket: Int, currentBoardState: MutableList<Int>): MutableList<Int> {
+        val currentPlayer1Turn = pocket in listOf(0, 1, 2, 3, 4, 5)
+        val playersStore = if (currentPlayer1Turn) 6 else 13
+        val otherPlayersStore = if (currentPlayer1Turn) 13 else 6
+        val playersPockets = if (currentPlayer1Turn) {
+            listOf(0, 1, 2, 3, 4, 5)
+        } else {
+            listOf(7, 8, 9, 10, 11, 12)
+        }
+        var numStonesToMove: Int = currentBoardState[pocket]
+        currentBoardState[pocket] = 0
+        var currentPocket = pocket + 1
+        // distribute stones into pockets
+        while (numStonesToMove > 0) {
+            if (currentPocket == otherPlayersStore) {
+                currentPocket = (currentPocket + 1) % 14
+            }
+            currentBoardState[currentPocket]++
+            currentPocket = (currentPocket + 1) % 14
+            numStonesToMove--
+        }
+        val lastPocket = if (currentPocket == 0) 13 else currentPocket - 1
+        // check if last stone ends in empty pocket on player's own side. If so, move all stones
+        // in opposite pocket to player's store.
+        val lastPocketOpposite = oppositePocket(lastPocket)
+        if (lastPocket in playersPockets && currentBoardState[lastPocket] == 1
+            && lastPocketOpposite != null) {
+            currentBoardState[playersStore] += currentBoardState[lastPocketOpposite]
+            currentBoardState[lastPocketOpposite] = 0
+        }
+        return currentBoardState
+    }
+
+    private fun checkMoveAgain(pocket: Int, currentBoardState: MutableList<Int>): Boolean {
+        val currentPlayer1Turn = pocket in listOf(0, 1, 2, 3, 4, 5)
+        val lastPocket = (pocket + currentBoardState[pocket]) % 14
+        return (currentPlayer1Turn && lastPocket == 6) || (!currentPlayer1Turn && lastPocket == 13)
+    }
+
+    private fun checkBottomEmpty(currentBoardState: List<Int>): Boolean {
         for (i in 0..5) {
-            if (_boardState[i] != 0) {
+            if (currentBoardState[i] != 0) {
                 return false
             }
         }
         return true
     }
 
-    private fun checkTopEmpty(): Boolean {
+    private fun checkTopEmpty(currentBoardState: List<Int>): Boolean {
         for (i in 7..12) {
-            if (_boardState[i] != 0) {
+            if (currentBoardState[i] != 0) {
                 return false
             }
         }
         return true
+    }
+
+    private fun checkGameOver(currentBoardState: List<Int>): Boolean {
+        return checkBottomEmpty(currentBoardState) || checkTopEmpty(currentBoardState)
     }
 
     private fun oppositePocket(pocket: Int): Int? {
@@ -118,106 +134,108 @@ class MancalaSinglePlayerViewModel : ViewModel() {
 
     fun aiMoveStones() {
         if (!_player1Turn) {
-            if (aiDifficulty == "easy") aiMoveStonesEasy()
-            else if (aiDifficulty == "intermediate") aiMoveStonesIntermediate()
+            when (aiDifficulty) {
+                "easy" -> applyMove(greedyMove())
+                "intermediate" -> applyMove(boundedMinimaxMove(3))
+                "hard" -> applyMove(boundedMinimaxMove(8))
+            }
         }
     }
 
-    private fun aiMoveStonesEasy() {
+    private fun randomMove(): Int {
+        val possibleMoves = mutableListOf<Int>()
+        for (i in 7..12) {
+            if (boardState[i] != 0) possibleMoves.add(i)
+        }
         val randomGenerator = Random(System.currentTimeMillis())
-        val randomPocket = randomGenerator.nextInt(7, 12)
-        if (_boardState[randomPocket] != 0) moveStones(randomPocket) else aiMoveStonesEasy()
+        val randomIndex = randomGenerator.nextInt(0, possibleMoves.size)
+        return possibleMoves[randomIndex]
     }
 
-    private fun aiMoveStonesIntermediate() {
-        val minimaxMove = minimaxMove()
-        moveStones(minimaxMove)
+    private fun evaluateBoard(currentBoardState: MutableList<Int>): Int {
+        return currentBoardState[13] - currentBoardState[6]
     }
 
-    private fun evaluateMove(pocket: Int, tempBoardState: MutableList<Int>,
-                             tempPlayer1Turn: Boolean): Triple<Int, MutableList<Int>, Boolean> {
-        Log.d("Intermediate", "BoardState = $tempBoardState, Player1Turn = $tempPlayer1Turn, evaluating move $pocket")
-        // returns difference in stones in player 1's (human) store after the move, the board
-        // state after the move, and whether the current player gets another turn.
-        val playersStore = if (tempPlayer1Turn) 6 else 13
-        val otherPlayersStore = if (tempPlayer1Turn) 13 else 6
-        val playersPockets = if (tempPlayer1Turn) {
+    private fun greedyMove(): Int {
+        // always choose the move that adds the most stones to the player's store
+        val possibleMoves = mutableListOf<Int>()
+        for (i in 7..12) {
+            if (boardState[i] != 0) possibleMoves.add(i)
+        }
+        if (possibleMoves.size == 1) return possibleMoves[0]
+        val moveScores = mutableListOf<Int>()
+        for (move in possibleMoves) {
+            val boardStateAfterMove = moveStones(move, boardState.toMutableList())
+            val moveScore = evaluateBoard(boardStateAfterMove)
+            moveScores.add(moveScore)
+        }
+        return possibleMoves[moveScores.indexOf(moveScores.max())]
+    }
+
+    private fun boundedMinimax(currentBoardState: MutableList<Int>, currentPlayer1Turn: Boolean,
+                               currentDepth: Int, maxDepth: Int): Int {
+        if (currentDepth == maxDepth) {
+            return evaluateBoard(currentBoardState)
+        } else if (checkGameOver(currentBoardState)) {
+            val boardAfterGameOver = currentBoardState.toMutableList()
+            for (i in 0..5) {
+                boardAfterGameOver[6] += boardAfterGameOver[i]
+                boardAfterGameOver[i] = 0
+            }
+            for (i in 7..12) {
+                boardAfterGameOver[13] += boardAfterGameOver[i]
+                boardAfterGameOver[i] = 0
+            }
+            return evaluateBoard(boardAfterGameOver)
+        }
+
+        //val playersStore: Int = if (currentPlayer1Turn) 6 else 13
+        //val otherPlayersStore = if (currentPlayer1Turn) 13 else 6
+        val playersPockets = if (currentPlayer1Turn) {
             listOf(0, 1, 2, 3, 4, 5)
         } else {
             listOf(7, 8, 9, 10, 11, 12)
         }
-        val stonesInPlayer1StoreBefore = tempBoardState[6]
-        var numStonesToMove: Int = tempBoardState[pocket]
-        tempBoardState[pocket] = 0
-        var currentPocket = pocket + 1
-        // distribute stones into pockets
-        while (numStonesToMove > 0) {
-            if (currentPocket == otherPlayersStore) {
-                currentPocket = (currentPocket + 1) % 14
-            }
-            tempBoardState[currentPocket]++
-            currentPocket = (currentPocket + 1) % 14
-            numStonesToMove--
+
+        // since there are 48 total stones, the score must be between -48 and 48
+        var bestScore = if (currentPlayer1Turn) 49 else -49
+        val possibleMoves = mutableListOf<Int>()
+        for (pocket in playersPockets) {
+            if (currentBoardState[pocket] != 0) possibleMoves.add(pocket)
         }
-        val lastPocket = if (currentPocket == 0) 13 else currentPocket - 1
-        // check if last stone ends in empty pocket on player's own side. If so, move all stones
-        // in opposite pocket to player's store.
-        val lastPocketOpposite = oppositePocket(lastPocket)
-        if (lastPocket in playersPockets && tempBoardState[lastPocket] == 1
-            && lastPocketOpposite != null) {
-            tempBoardState[playersStore] += tempBoardState[lastPocketOpposite]
-            tempBoardState[lastPocketOpposite] = 0
-        }
-        // check if last stone ends in player's store. If so player gets another turn
-        if (checkTopEmpty() || checkBottomEmpty()) {
-            for (i in 0..5) {
-                tempBoardState[6] += tempBoardState[i]
-                tempBoardState[i] = 0
+        for (move in possibleMoves) {
+            val boardStateAfterMove = moveStones(move, currentBoardState.toMutableList())
+            val player1TurnAfterMove = if (checkMoveAgain(move, currentBoardState.toMutableList())) {
+                currentPlayer1Turn
+            } else {
+                !currentPlayer1Turn
             }
-            for (i in 7..12) {
-                tempBoardState[13] += tempBoardState[i]
-                tempBoardState[i] = 0
+            val score = boundedMinimax(boardStateAfterMove, player1TurnAfterMove,
+                currentDepth+1, maxDepth)
+            if (currentPlayer1Turn) {
+                if (score < bestScore) bestScore = score
+            } else {
+                if (score > bestScore) bestScore = score
             }
         }
-        val stonesInPlayer1StoreDifference = tempBoardState[6] - stonesInPlayer1StoreBefore
-        return if (lastPocket != playersStore) {
-            Triple(stonesInPlayer1StoreDifference, tempBoardState,false)
-        } else {
-            Triple(stonesInPlayer1StoreDifference, tempBoardState,true)
-        }
+        return bestScore
     }
 
-    private fun minimaxMove(): Int {
-        // TODO: account for ability to move again if last stone ends in player's store.
-        // create list of possible moves by player 2
-        val player2PossibleMoves = mutableListOf<Int>()
+    private fun boundedMinimaxMove(maxDepth: Int): Int {
+        val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
-            if (_boardState[i] != 0) player2PossibleMoves.add(i)
+            if (boardState[i] != 0) possibleMoves.add(i)
         }
-        // if only one possible move, return that move without any more calculation
-        if (player2PossibleMoves.size == 1) return player2PossibleMoves[0]
-        val player1MaximumScores = mutableListOf<Int>()
-        for (player2Move in player2PossibleMoves) {
-            val boardStateBeforePlayer2Move = _boardState.toMutableList()
-            val (scoreAfterPlayer2Move, boardStateAfterPlayer2Move, player1TurnAfterPlayer2Move) =
-                evaluateMove(player2Move, boardStateBeforePlayer2Move, false)
-            // create list of possible moves by player 1
-            val player1PossibleMoves = mutableListOf<Int>()
-            for (j in 0..5) {
-                if (boardStateAfterPlayer2Move[j] != 0) player1PossibleMoves.add(j)
-            }
-            val player1Scores = mutableListOf<Int>()
-            for (player1Move in player1PossibleMoves) {
-                val tempBoardStateAfterPlayer2Move = boardStateAfterPlayer2Move.toMutableList()
-                val (scoreAfterPlayer1Move, boardStateAfterPlayer1Move, player1TurnAfterPlayer1Move) =
-                    evaluateMove(player1Move, tempBoardStateAfterPlayer2Move, true)
-                player1Scores.add(scoreAfterPlayer2Move + scoreAfterPlayer1Move)
-            }
-            player1MaximumScores.add(player1Scores.max())
+        val minimaxScores = mutableListOf<Int>()
+        for (move in possibleMoves) {
+            val boardStateAfterMove = moveStones(move, boardState.toMutableList())
+            val player1TurnAfterMove = !checkMoveAgain(move, boardState.toMutableList())
+            minimaxScores.add(boundedMinimax(boardStateAfterMove,
+                player1TurnAfterMove, 1, maxDepth))
         }
-        // return move that minimizes the maximum possible score by player 1 (human)
-        Log.d("Intermediate", "chose move ${player2PossibleMoves[player1MaximumScores.indexOf(player1MaximumScores.min())]}")
-        return player2PossibleMoves[player1MaximumScores.indexOf(player1MaximumScores.min())]
+        Log.d("Minimax", "board state: $boardState")
+        Log.d("Minimax", "chose move: ${possibleMoves[minimaxScores.indexOf(minimaxScores.max())]}")
+        return possibleMoves[minimaxScores.indexOf(minimaxScores.max())]
     }
 
 }

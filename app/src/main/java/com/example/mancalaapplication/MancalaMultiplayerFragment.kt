@@ -118,7 +118,8 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
         MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog)
             .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.winner,
-                if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2"))
+                if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2",
+                viewModel.boardState[6], viewModel.boardState[13]))
             .setCancelable(false)
             .setPositiveButton(getString(R.string.play_again)) { _, _ ->
                 run {

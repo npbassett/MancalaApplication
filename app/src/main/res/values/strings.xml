@@ -13,9 +13,9 @@
     <string name="stones">%d</string>
     <string name="congratulations">Congratulations!</string>
     <string name="better_luck">Better luck next time…</string>
-    <string name="you_win">You have beaten MancalaBot!</string>
-    <string name="mancalabot_won">MancalaBot won.</string>
-    <string name="winner">%s is the winner!</string>
+    <string name="you_won">You beat MancalaBot!\nThe final score was %d - %d</string>
+    <string name="mancalabot_won">MancalaBot won.\nThe final score was %d - %d</string>
+    <string name="winner">%s is the winner!\nThe final score was %d - %d</string>
     <string name="exit">Exit</string>
     <string name="play_again">Play again</string>
     <string name="pocket_wrong_side_snackbar">Please choose a pocket on the correct side of the board.</string>
