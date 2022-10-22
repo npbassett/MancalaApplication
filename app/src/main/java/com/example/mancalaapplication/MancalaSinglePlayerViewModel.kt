@@ -1,7 +1,8 @@
 package com.example.mancalaapplication
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import java.lang.Integer.max
+import java.lang.Integer.min
 import kotlin.random.Random
 
 class MancalaSinglePlayerViewModel : ViewModel() {
@@ -136,8 +137,8 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         if (!_player1Turn) {
             when (aiDifficulty) {
                 "easy" -> applyMove(greedyMove())
-                "intermediate" -> applyMove(boundedMinimaxMove(3))
-                "hard" -> applyMove(boundedMinimaxMove(8))
+                "intermediate" -> applyMove(boundedMinimaxMoveAlphaBeta(3))
+                "hard" -> applyMove(boundedMinimaxMoveAlphaBeta(8))
             }
         }
     }
@@ -188,15 +189,11 @@ class MancalaSinglePlayerViewModel : ViewModel() {
             }
             return evaluateBoard(boardAfterGameOver)
         }
-
-        //val playersStore: Int = if (currentPlayer1Turn) 6 else 13
-        //val otherPlayersStore = if (currentPlayer1Turn) 13 else 6
         val playersPockets = if (currentPlayer1Turn) {
             listOf(0, 1, 2, 3, 4, 5)
         } else {
             listOf(7, 8, 9, 10, 11, 12)
         }
-
         // since there are 48 total stones, the score must be between -48 and 48
         var bestScore = if (currentPlayer1Turn) 49 else -49
         val possibleMoves = mutableListOf<Int>()
@@ -233,8 +230,74 @@ class MancalaSinglePlayerViewModel : ViewModel() {
             minimaxScores.add(boundedMinimax(boardStateAfterMove,
                 player1TurnAfterMove, 1, maxDepth))
         }
-        Log.d("Minimax", "board state: $boardState")
-        Log.d("Minimax", "chose move: ${possibleMoves[minimaxScores.indexOf(minimaxScores.max())]}")
+        return possibleMoves[minimaxScores.indexOf(minimaxScores.max())]
+    }
+
+    private fun boundedMinimaxAlphaBeta(currentBoardState: MutableList<Int>,
+                                        currentPlayer1Turn: Boolean, currentDepth: Int,
+                                        maxDepth: Int, inputAlpha: Int, inputBeta: Int): Int {
+        var alpha = inputAlpha
+        var beta = inputBeta
+        if (currentDepth == maxDepth) {
+            return evaluateBoard(currentBoardState)
+        } else if (checkGameOver(currentBoardState)) {
+            val boardAfterGameOver = currentBoardState.toMutableList()
+            for (i in 0..5) {
+                boardAfterGameOver[6] += boardAfterGameOver[i]
+                boardAfterGameOver[i] = 0
+            }
+            for (i in 7..12) {
+                boardAfterGameOver[13] += boardAfterGameOver[i]
+                boardAfterGameOver[i] = 0
+            }
+            return evaluateBoard(boardAfterGameOver)
+        }
+        val playersPockets = if (currentPlayer1Turn) {
+            listOf(0, 1, 2, 3, 4, 5)
+        } else {
+            listOf(7, 8, 9, 10, 11, 12)
+        }
+        // since there are 48 total stones, the score must be between -48 and 48
+        var bestScore = if (currentPlayer1Turn) 49 else -49
+        val possibleMoves = mutableListOf<Int>()
+        for (pocket in playersPockets) {
+            if (currentBoardState[pocket] != 0) possibleMoves.add(pocket)
+        }
+        for (move in possibleMoves) {
+            val boardStateAfterMove = moveStones(move, currentBoardState.toMutableList())
+            val player1TurnAfterMove = if (checkMoveAgain(move, currentBoardState.toMutableList())) {
+                currentPlayer1Turn
+            } else {
+                !currentPlayer1Turn
+            }
+            val score = boundedMinimaxAlphaBeta(boardStateAfterMove, player1TurnAfterMove,
+                currentDepth+1, maxDepth, alpha, beta)
+            if (currentPlayer1Turn) {
+                if (score < bestScore) bestScore = score
+                if (bestScore <= alpha)  break
+                beta = min(beta, bestScore)
+
+            } else {
+                if (score > bestScore) bestScore = score
+                if (bestScore >= beta) break
+                alpha = max(alpha, bestScore)
+            }
+        }
+        return bestScore
+    }
+
+    private fun boundedMinimaxMoveAlphaBeta(maxDepth: Int): Int {
+        val possibleMoves = mutableListOf<Int>()
+        for (i in 7..12) {
+            if (boardState[i] != 0) possibleMoves.add(i)
+        }
+        val minimaxScores = mutableListOf<Int>()
+        for (move in possibleMoves) {
+            val boardStateAfterMove = moveStones(move, boardState.toMutableList())
+            val player1TurnAfterMove = !checkMoveAgain(move, boardState.toMutableList())
+            minimaxScores.add(boundedMinimaxAlphaBeta(boardStateAfterMove,
+                player1TurnAfterMove, 1, maxDepth, -49, 49))
+        }
         return possibleMoves[minimaxScores.indexOf(minimaxScores.max())]
     }
 
