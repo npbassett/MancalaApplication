@@ -14,6 +14,12 @@
         <item name="cornerRadius">50dp</item>
     </style>
 
+    <style name="RoundedImageButton" parent="">
+        <item name="backgroundTint">@color/accent</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerRadius">100dp</item>
+    </style>
+
     <style name="AlertDialog" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="android:background">@color/primary</item>
         <item name="android:textColor">@color/accent</item>

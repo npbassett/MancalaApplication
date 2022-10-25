@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -7,6 +8,288 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket0"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvPocket1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket13"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket12"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket1"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvPocket2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket0"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket11"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket2"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvPocket3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket1"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket10"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket3"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvPocket4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket2"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket9"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket4"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvPocket5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket3"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket8"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket5"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvPocket6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket4"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket7"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket6"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_store_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket7"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket5"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket5"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket8"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket4"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket4"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket9"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket3"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket3"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket10"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket2"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket2"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket11"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket1"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket1"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket12"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_button_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket0"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket0"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPocket13"
+            android:layout_width="@dimen/board_button_width"
+            android:layout_height="@dimen/board_store_height"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cvPocket0"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="5dp">
+            <ImageButton
+                android:id="@+id/btnPocket13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pocket_4_stones"
+                android:clickable="true"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
+
+        <!--
         <Button
             android:id="@+id/btnPocket0"
             android:layout_width="@dimen/board_button_width"
@@ -82,7 +365,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnPocket6"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@id/btnPocket4"
+            app:layout_constraintStart_toEndOf="@id/cvPocket4"
             app:layout_constraintTop_toBottomOf="@id/btnPocket7" />
 
         <Button
@@ -95,7 +378,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@id/btnPocket5"
+            app:layout_constraintStart_toEndOf="@id/cvPocket5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -105,9 +388,9 @@
             android:layout_margin="@dimen/board_button_layout_margin"
             android:text="@string/board_button_text"
             android:textSize="@dimen/board_button_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket5"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket5"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket5"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket5"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket5"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket5"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -118,9 +401,9 @@
             android:layout_margin="@dimen/board_button_layout_margin"
             android:text="@string/board_button_text"
             android:textSize="@dimen/board_button_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket4"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket4"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket4"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket4"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket4"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -131,9 +414,9 @@
             android:layout_margin="@dimen/board_button_layout_margin"
             android:text="@string/board_button_text"
             android:textSize="@dimen/board_button_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket3"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket3"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket3"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket3"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket3"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -144,9 +427,9 @@
             android:layout_margin="@dimen/board_button_layout_margin"
             android:text="@string/board_button_text"
             android:textSize="@dimen/board_button_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket2"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket2"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket2"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket2"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket2"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -157,9 +440,9 @@
             android:layout_margin="@dimen/board_button_layout_margin"
             android:text="@string/board_button_text"
             android:textSize="@dimen/board_button_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket1"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket1"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket1"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket1"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket1"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -170,9 +453,9 @@
             android:layout_margin="@dimen/board_button_layout_margin"
             android:text="@string/board_button_text"
             android:textSize="@dimen/board_button_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket0"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket0"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket0"
+            app:layout_constraintBottom_toTopOf="@id/cvPocket0"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket0"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -184,11 +467,12 @@
             android:textSize="@dimen/board_button_text_size"
             android:layout_margin="@dimen/board_button_layout_margin"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnPocket0"
+            app:layout_constraintEnd_toStartOf="@id/cvPocket0"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+            -->
 
         <TextView
             android:id="@+id/tvPocket0"
@@ -196,9 +480,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket0"
-            app:layout_constraintStart_toStartOf="@id/btnPocket0"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket0" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket0"
+            app:layout_constraintStart_toStartOf="@id/cvPocket0"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket0" />
 
         <TextView
             android:id="@+id/tvPocket1"
@@ -206,9 +490,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket1"
-            app:layout_constraintStart_toStartOf="@id/btnPocket1"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket1" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket1"
+            app:layout_constraintStart_toStartOf="@id/cvPocket1"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket1" />
 
         <TextView
             android:id="@+id/tvPocket2"
@@ -216,9 +500,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket2"
-            app:layout_constraintStart_toStartOf="@id/btnPocket2"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket2" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket2"
+            app:layout_constraintStart_toStartOf="@id/cvPocket2"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket2" />
 
         <TextView
             android:id="@+id/tvPocket3"
@@ -226,9 +510,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket3"
-            app:layout_constraintStart_toStartOf="@id/btnPocket3"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket3" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket3"
+            app:layout_constraintStart_toStartOf="@id/cvPocket3"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket3" />
 
         <TextView
             android:id="@+id/tvPocket4"
@@ -236,9 +520,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket4"
-            app:layout_constraintStart_toStartOf="@id/btnPocket4"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket4" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket4"
+            app:layout_constraintStart_toStartOf="@id/cvPocket4"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket4" />
 
         <TextView
             android:id="@+id/tvPocket5"
@@ -246,9 +530,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket5"
-            app:layout_constraintStart_toStartOf="@id/btnPocket5"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket5" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket5"
+            app:layout_constraintStart_toStartOf="@id/cvPocket5"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket5" />
 
         <TextView
             android:id="@+id/tvPocket6"
@@ -256,9 +540,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/btnPocket6"
-            app:layout_constraintStart_toStartOf="@+id/btnPocket6"
-            app:layout_constraintTop_toBottomOf="@+id/btnPocket6" />
+            app:layout_constraintEnd_toEndOf="@+id/cvPocket6"
+            app:layout_constraintStart_toStartOf="@+id/cvPocket6"
+            app:layout_constraintTop_toBottomOf="@+id/cvPocket6" />
 
         <TextView
             android:id="@+id/tvPocket7"
@@ -266,9 +550,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket7"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket7"
-            app:layout_constraintStart_toStartOf="@id/btnPocket7" />
+            app:layout_constraintBottom_toTopOf="@id/cvPocket7"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket7"
+            app:layout_constraintStart_toStartOf="@id/cvPocket7" />
 
         <TextView
             android:id="@+id/tvPocket8"
@@ -276,9 +560,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket8"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket8"
-            app:layout_constraintStart_toStartOf="@id/btnPocket8" />
+            app:layout_constraintBottom_toTopOf="@id/cvPocket8"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket8"
+            app:layout_constraintStart_toStartOf="@id/cvPocket8" />
 
         <TextView
             android:id="@+id/tvPocket9"
@@ -286,9 +570,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket9"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket9"
-            app:layout_constraintStart_toStartOf="@id/btnPocket9" />
+            app:layout_constraintBottom_toTopOf="@id/cvPocket9"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket9"
+            app:layout_constraintStart_toStartOf="@id/cvPocket9" />
 
         <TextView
             android:id="@+id/tvPocket10"
@@ -296,9 +580,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket10"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket10"
-            app:layout_constraintStart_toStartOf="@id/btnPocket10" />
+            app:layout_constraintBottom_toTopOf="@id/cvPocket10"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket10"
+            app:layout_constraintStart_toStartOf="@id/cvPocket10" />
 
         <TextView
             android:id="@+id/tvPocket11"
@@ -306,9 +590,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket11"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket11"
-            app:layout_constraintStart_toStartOf="@id/btnPocket11" />
+            app:layout_constraintBottom_toTopOf="@id/cvPocket11"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket11"
+            app:layout_constraintStart_toStartOf="@id/cvPocket11" />
 
         <TextView
             android:id="@+id/tvPocket12"
@@ -316,9 +600,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintBottom_toTopOf="@id/btnPocket12"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket12"
-            app:layout_constraintStart_toStartOf="@id/btnPocket12" />
+            app:layout_constraintBottom_toTopOf="@id/cvPocket12"
+            app:layout_constraintEnd_toEndOf="@id/cvPocket12"
+            app:layout_constraintStart_toStartOf="@id/cvPocket12" />
 
         <TextView
             android:id="@+id/tvPocket13"
@@ -326,9 +610,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stones"
             android:textSize="@dimen/board_stone_count_text_size"
-            app:layout_constraintEnd_toEndOf="@id/btnPocket13"
-            app:layout_constraintStart_toStartOf="@id/btnPocket13"
-            app:layout_constraintTop_toBottomOf="@id/btnPocket13" />
+            app:layout_constraintEnd_toEndOf="@id/cvPocket13"
+            app:layout_constraintStart_toStartOf="@id/cvPocket13"
+            app:layout_constraintTop_toBottomOf="@id/cvPocket13" />
 
         <TextView
             android:id="@+id/tvPlayersTurn"
@@ -338,6 +622,17 @@
             android:textSize="@dimen/players_turn_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/board_button_text"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/board_button_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="41dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

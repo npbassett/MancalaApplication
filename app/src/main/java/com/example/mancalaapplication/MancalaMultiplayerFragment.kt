@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.mancalaapplication.databinding.MancalaFragmentBinding
@@ -25,23 +26,72 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
         return binding.root
     }
 
+    private fun getPocketImage(numStones: Int): Int {
+        when (numStones) {
+            0 -> return R.drawable.pocket_0_stones
+            1 -> return R.drawable.pocket_1_stones
+            2 -> return R.drawable.pocket_2_stones
+            3 -> return R.drawable.pocket_3_stones
+            4 -> return R.drawable.pocket_4_stones
+            5 -> return R.drawable.pocket_5_stones
+            6 -> return R.drawable.pocket_6_stones
+            7 -> return R.drawable.pocket_7_stones
+            8 -> return R.drawable.pocket_8_stones
+            9 -> return R.drawable.pocket_9_stones
+            10 -> return R.drawable.pocket_10_stones
+            11 -> return R.drawable.pocket_11_stones
+            12 -> return R.drawable.pocket_12_stones
+            13 -> return R.drawable.pocket_13_stones
+            14 -> return R.drawable.pocket_14_stones
+            else -> return R.drawable.pocket_14_stones
+        }
+    }
+
     private fun updateDisplay() {
         binding.tvPlayersTurn.text = if (viewModel.player1Turn) "Player 1's turn"
             else "Player 2's turn"
         binding.tvPocket0.text = getString(R.string.stones, viewModel.boardState[0])
+        binding.btnPocket0.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[0]), null)
         binding.tvPocket1.text = getString(R.string.stones, viewModel.boardState[1])
+        binding.btnPocket1.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[1]), null)
         binding.tvPocket2.text = getString(R.string.stones, viewModel.boardState[2])
+        binding.btnPocket2.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[2]), null)
         binding.tvPocket3.text = getString(R.string.stones, viewModel.boardState[3])
+        binding.btnPocket3.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[3]), null)
         binding.tvPocket4.text = getString(R.string.stones, viewModel.boardState[4])
+        binding.btnPocket4.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[4]), null)
         binding.tvPocket5.text = getString(R.string.stones, viewModel.boardState[5])
+        binding.btnPocket5.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[5]), null)
         binding.tvPocket6.text = getString(R.string.stones, viewModel.boardState[6])
+        binding.btnPocket6.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[6]), null)
         binding.tvPocket7.text = getString(R.string.stones, viewModel.boardState[7])
+        binding.btnPocket7.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[7]), null)
         binding.tvPocket8.text = getString(R.string.stones, viewModel.boardState[8])
+        binding.btnPocket8.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[8]), null)
         binding.tvPocket9.text = getString(R.string.stones, viewModel.boardState[9])
+        binding.btnPocket9.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[9]), null)
         binding.tvPocket10.text = getString(R.string.stones, viewModel.boardState[10])
+        binding.btnPocket10.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[10]), null)
         binding.tvPocket11.text = getString(R.string.stones, viewModel.boardState[11])
+        binding.btnPocket11.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[11]), null)
         binding.tvPocket12.text = getString(R.string.stones, viewModel.boardState[12])
+        binding.btnPocket12.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[12]), null)
         binding.tvPocket13.text = getString(R.string.stones, viewModel.boardState[13])
+        binding.btnPocket13.background = ResourcesCompat.getDrawable(resources,
+            getPocketImage(viewModel.boardState[13]), null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
