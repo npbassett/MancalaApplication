@@ -25,7 +25,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -45,7 +46,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -65,7 +67,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -85,7 +88,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -105,7 +109,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -125,7 +130,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -145,7 +151,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -165,7 +172,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -185,7 +193,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -205,7 +214,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -225,7 +235,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -245,7 +256,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -265,7 +277,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -286,7 +299,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/pocket_4_stones"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@string/board_button_description" />
         </androidx.cardview.widget.CardView>
 
         <!--

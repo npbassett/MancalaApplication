@@ -49,23 +49,22 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     private fun getPocketImage(numStones: Int): Int {
-        when (numStones) {
-            0 -> return R.drawable.pocket_0_stones
-            1 -> return R.drawable.pocket_1_stones
-            2 -> return R.drawable.pocket_2_stones
-            3 -> return R.drawable.pocket_3_stones
-            4 -> return R.drawable.pocket_4_stones
-            5 -> return R.drawable.pocket_5_stones
-            6 -> return R.drawable.pocket_6_stones
-            7 -> return R.drawable.pocket_7_stones
-            8 -> return R.drawable.pocket_8_stones
-            9 -> return R.drawable.pocket_9_stones
-            10 -> return R.drawable.pocket_10_stones
-            11 -> return R.drawable.pocket_11_stones
-            12 -> return R.drawable.pocket_12_stones
-            13 -> return R.drawable.pocket_13_stones
-            14 -> return R.drawable.pocket_14_stones
-            else -> return R.drawable.pocket_14_stones
+        return if (numStones in 0..14) {
+            resources.getIdentifier("pocket_${numStones}_stones",
+                "drawable", context?.packageName)
+        } else {
+            resources.getIdentifier("pocket_35_stones",
+                "drawable", context?.packageName)
+        }
+    }
+
+    private fun getStoreImage(numStones: Int): Int {
+        return if (numStones in 0..35) {
+            resources.getIdentifier("store_${numStones}_stones",
+                "drawable", context?.packageName)
+        } else {
+            resources.getIdentifier("store_35_stones",
+                "drawable", context?.packageName)
         }
     }
 
@@ -92,7 +91,7 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             getPocketImage(viewModel.boardState[5]), null)
         binding.tvPocket6.text = getString(R.string.stones, viewModel.boardState[6])
         binding.btnPocket6.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[6]), null)
+            getStoreImage(viewModel.boardState[6]), null)
         binding.tvPocket7.text = getString(R.string.stones, viewModel.boardState[7])
         binding.btnPocket7.background = ResourcesCompat.getDrawable(resources,
             getPocketImage(viewModel.boardState[7]), null)
@@ -113,7 +112,7 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             getPocketImage(viewModel.boardState[12]), null)
         binding.tvPocket13.text = getString(R.string.stones, viewModel.boardState[13])
         binding.btnPocket13.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[13]), null)
+            getStoreImage(viewModel.boardState[13]), null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

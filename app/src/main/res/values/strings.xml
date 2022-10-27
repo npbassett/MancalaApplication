@@ -10,6 +10,7 @@
     <string name="intermediate">Intermediate</string>
     <string name="hard">Hard</string>
     <string name="board_button_text">MOVE STONES</string>
+    <string name="board_button_description">stones in pocket</string>
     <string name="stones">%d</string>
     <string name="tie">The game ended in a tie.</string>
     <string name="tie_score">The final score was 24 – 24</string>
