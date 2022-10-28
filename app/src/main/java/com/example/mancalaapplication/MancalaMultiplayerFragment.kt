@@ -9,9 +9,14 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.mancalaapplication.databinding.MancalaFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
 
@@ -46,58 +51,9 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
         }
     }
 
-    private fun updateDisplay() {
-        binding.tvPlayersTurn.text = if (viewModel.player1Turn) "Player 1's turn"
-            else "Player 2's turn"
-        binding.tvPocket0.text = getString(R.string.stones, viewModel.boardState[0])
-        binding.btnPocket0.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[0]), null)
-        binding.tvPocket1.text = getString(R.string.stones, viewModel.boardState[1])
-        binding.btnPocket1.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[1]), null)
-        binding.tvPocket2.text = getString(R.string.stones, viewModel.boardState[2])
-        binding.btnPocket2.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[2]), null)
-        binding.tvPocket3.text = getString(R.string.stones, viewModel.boardState[3])
-        binding.btnPocket3.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[3]), null)
-        binding.tvPocket4.text = getString(R.string.stones, viewModel.boardState[4])
-        binding.btnPocket4.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[4]), null)
-        binding.tvPocket5.text = getString(R.string.stones, viewModel.boardState[5])
-        binding.btnPocket5.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[5]), null)
-        binding.tvPocket6.text = getString(R.string.stones, viewModel.boardState[6])
-        binding.btnPocket6.background = ResourcesCompat.getDrawable(resources,
-            getStoreImage(viewModel.boardState[6]), null)
-        binding.tvPocket7.text = getString(R.string.stones, viewModel.boardState[7])
-        binding.btnPocket7.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[7]), null)
-        binding.tvPocket8.text = getString(R.string.stones, viewModel.boardState[8])
-        binding.btnPocket8.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[8]), null)
-        binding.tvPocket9.text = getString(R.string.stones, viewModel.boardState[9])
-        binding.btnPocket9.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[9]), null)
-        binding.tvPocket10.text = getString(R.string.stones, viewModel.boardState[10])
-        binding.btnPocket10.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[10]), null)
-        binding.tvPocket11.text = getString(R.string.stones, viewModel.boardState[11])
-        binding.btnPocket11.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[11]), null)
-        binding.tvPocket12.text = getString(R.string.stones, viewModel.boardState[12])
-        binding.btnPocket12.background = ResourcesCompat.getDrawable(resources,
-            getPocketImage(viewModel.boardState[12]), null)
-        binding.tvPocket13.text = getString(R.string.stones, viewModel.boardState[13])
-        binding.btnPocket13.background = ResourcesCompat.getDrawable(resources,
-            getStoreImage(viewModel.boardState[13]), null)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Update UI to reflect initial number of stones in each pocket.
-        updateDisplay()
-        // set up click listener on each button
+        subscribeToObservables()
         binding.btnPocket0.setOnClickListener { onButtonClick(0) }
         binding.btnPocket1.setOnClickListener { onButtonClick(1) }
         binding.btnPocket2.setOnClickListener { onButtonClick(2) }
@@ -148,19 +104,15 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     private fun onButtonClick(pocket: Int) {
-        val beforePlayer1Turn = viewModel.player1Turn
+        val beforePlayer1Turn = viewModel.player1Turn.value
         if (viewModel.pocketWrongSide(pocket)) {
             wrongSideSnackbar()
-            return
         } else if (viewModel.pocketEmpty(pocket)) {
             emptyPocketSnackbar()
-            return
         } else {
-            viewModel.moveStones(pocket)
-            updateDisplay()
-            if (viewModel.gameOver) showGameOverDialog()
+            viewModel.applyMove(pocket)
+            if (beforePlayer1Turn == viewModel.player1Turn.value) moveAgainSnackbar()
         }
-        if (beforePlayer1Turn == viewModel.player1Turn) moveAgainSnackbar()
     }
 
     private fun showGameOverDialog() {
@@ -174,7 +126,7 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
                     getString(
                         R.string.winner,
                         if (viewModel.checkPlayer1Winner()) "Player 1" else "Player 2",
-                        viewModel.boardState[6], viewModel.boardState[13]
+                        viewModel.boardState.value[6], viewModel.boardState.value[13]
                     )
                 )
             }
@@ -182,13 +134,76 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
             setPositiveButton(getString(R.string.play_again)) { _, _ ->
                 run {
                     viewModel.restartGame()
-                    updateDisplay()
                 }
             }
             setNegativeButton(R.string.exit) { _, _ ->
                 startActivity(Intent(activity, DashboardActivity::class.java))
             }
             show()
+        }
+    }
+
+    private fun subscribeToObservables() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.player1Turn.collectLatest {
+                        binding.tvPlayersTurn.text = if (it) "Player 1's turn"
+                            else "Player 2's turn"
+                    }
+                }
+                launch {
+                    viewModel.boardState.collectLatest {
+                        binding.tvPocket0.text = getString(R.string.stones, it[0])
+                        binding.btnPocket0.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[0]), null)
+                        binding.tvPocket1.text = getString(R.string.stones, it[1])
+                        binding.btnPocket1.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[1]), null)
+                        binding.tvPocket2.text = getString(R.string.stones, it[2])
+                        binding.btnPocket2.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[2]), null)
+                        binding.tvPocket3.text = getString(R.string.stones, it[3])
+                        binding.btnPocket3.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[3]), null)
+                        binding.tvPocket4.text = getString(R.string.stones, it[4])
+                        binding.btnPocket4.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[4]), null)
+                        binding.tvPocket5.text = getString(R.string.stones, it[5])
+                        binding.btnPocket5.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[5]), null)
+                        binding.tvPocket6.text = getString(R.string.stones, it[6])
+                        binding.btnPocket6.background = ResourcesCompat.getDrawable(
+                            resources, getStoreImage(it[6]), null)
+                        binding.tvPocket7.text = getString(R.string.stones, it[7])
+                        binding.btnPocket7.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[7]), null)
+                        binding.tvPocket8.text = getString(R.string.stones, it[8])
+                        binding.btnPocket8.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[8]), null)
+                        binding.tvPocket9.text = getString(R.string.stones, it[9])
+                        binding.btnPocket9.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[9]), null)
+                        binding.tvPocket10.text = getString(R.string.stones, it[10])
+                        binding.btnPocket10.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[10]), null)
+                        binding.tvPocket11.text = getString(R.string.stones, it[11])
+                        binding.btnPocket11.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[11]), null)
+                        binding.tvPocket12.text = getString(R.string.stones, it[12])
+                        binding.btnPocket12.background = ResourcesCompat.getDrawable(
+                            resources, getPocketImage(it[12]), null)
+                        binding.tvPocket13.text = getString(R.string.stones, it[13])
+                        binding.btnPocket13.background = ResourcesCompat.getDrawable(
+                            resources, getStoreImage(it[13]), null)
+                    }
+                }
+                launch {
+                    viewModel.gameOver.collectLatest {
+                        if (it) showGameOverDialog()
+                    }
+                }
+            }
         }
     }
 }

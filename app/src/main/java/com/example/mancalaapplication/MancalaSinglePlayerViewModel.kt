@@ -1,6 +1,8 @@
 package com.example.mancalaapplication
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.random.Random
@@ -13,57 +15,57 @@ class MancalaSinglePlayerViewModel : ViewModel() {
                 "Difficulty must be either easy, intermediate, or hard.")).also { field = it }
         }
 
-    private var _boardState = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
-    private var _player1Turn = true
-    private var _gameOver = false
+    private val _boardState = MutableStateFlow(
+        mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0))
+    val boardState: StateFlow<List<Int>> = _boardState
+
+    private val _player1Turn = MutableStateFlow(true)
+    val player1Turn: StateFlow<Boolean> = _player1Turn
+
+    private val _gameOver = MutableStateFlow(false)
+    val gameOver: StateFlow<Boolean> = _gameOver
+
     private val _player1Pockets = listOf(0, 1, 2, 3, 4, 5)
     private val _player2Pockets = listOf(7, 8, 9, 10, 11, 12)
 
-    val boardState: List<Int>
-        get() = _boardState.toList()
-    val player1Turn: Boolean
-        get() = _player1Turn
-    val gameOver: Boolean
-        get() = _gameOver
-
     fun restartGame() {
-        _boardState = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
-        _player1Turn = true
-        _gameOver = false
+        _boardState.value = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
+        _player1Turn.value = true
+        _gameOver.value = false
     }
 
     fun checkPlayer1Winner(): Boolean {
-        return boardState[6] > boardState[13]
+        return boardState.value[6] > boardState.value[13]
     }
 
     fun checkTie(): Boolean {
-        return boardState[6] == boardState[13]
+        return boardState.value[6] == boardState.value[13]
     }
 
     fun pocketWrongSide(pocket: Int): Boolean {
-        return (player1Turn && pocket in _player2Pockets) ||
-                (!player1Turn && pocket in _player1Pockets)
+        return (player1Turn.value && pocket in _player2Pockets) ||
+                (!player1Turn.value && pocket in _player1Pockets)
     }
 
     fun pocketEmpty(pocket: Int): Boolean {
-        return _boardState[pocket] == 0
+        return _boardState.value[pocket] == 0
     }
 
     fun applyMove(pocket: Int) {
-        val boardStateBeforeMove = boardState.toMutableList()
-        _player1Turn = if (checkMoveAgain(pocket, boardStateBeforeMove)) {
-            player1Turn
-        } else !player1Turn
-        _boardState = moveStones(pocket, boardStateBeforeMove)
-        _gameOver = checkGameOver(boardState)
-        if (gameOver) {
+        val boardStateBeforeMove = boardState.value.toMutableList()
+        _player1Turn.value = if (checkMoveAgain(pocket, boardStateBeforeMove)) {
+            player1Turn.value
+        } else !player1Turn.value
+        _boardState.value = moveStones(pocket, boardStateBeforeMove)
+        _gameOver.value = checkGameOver(boardState.value)
+        if (gameOver.value) {
             for (i in 0..5) {
-                _boardState[6] += _boardState[i]
-                _boardState[i] = 0
+                _boardState.value[6] += _boardState.value[i]
+                _boardState.value[i] = 0
             }
             for (i in 7..12) {
-                _boardState[13] += _boardState[i]
-                _boardState[i] = 0
+                _boardState.value[13] += _boardState.value[i]
+                _boardState.value[i] = 0
             }
         }
     }
@@ -138,7 +140,7 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     }
 
     fun aiMoveStones() {
-        if (!_player1Turn) {
+        if (!_player1Turn.value) {
             when (aiDifficulty) {
                 "easy" -> applyMove(greedyMove())
                 "intermediate" -> applyMove(boundedMinimaxMoveAlphaBeta(3))
@@ -150,7 +152,7 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     private fun randomMove(): Int {
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
-            if (boardState[i] != 0) possibleMoves.add(i)
+            if (boardState.value[i] != 0) possibleMoves.add(i)
         }
         val randomGenerator = Random(System.currentTimeMillis())
         val randomIndex = randomGenerator.nextInt(0, possibleMoves.size)
@@ -165,12 +167,12 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         // always choose the move that adds the most stones to the player's store
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
-            if (boardState[i] != 0) possibleMoves.add(i)
+            if (boardState.value[i] != 0) possibleMoves.add(i)
         }
         if (possibleMoves.size == 1) return possibleMoves[0]
         val moveScores = mutableListOf<Int>()
         for (move in possibleMoves) {
-            val boardStateAfterMove = moveStones(move, boardState.toMutableList())
+            val boardStateAfterMove = moveStones(move, boardState.value.toMutableList())
             val moveScore = evaluateBoard(boardStateAfterMove)
             moveScores.add(moveScore)
         }
@@ -225,12 +227,12 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     private fun boundedMinimaxMove(maxDepth: Int): Int {
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
-            if (boardState[i] != 0) possibleMoves.add(i)
+            if (boardState.value[i] != 0) possibleMoves.add(i)
         }
         val minimaxScores = mutableListOf<Int>()
         for (move in possibleMoves) {
-            val boardStateAfterMove = moveStones(move, boardState.toMutableList())
-            val player1TurnAfterMove = !checkMoveAgain(move, boardState.toMutableList())
+            val boardStateAfterMove = moveStones(move, boardState.value.toMutableList())
+            val player1TurnAfterMove = !checkMoveAgain(move, boardState.value.toMutableList())
             minimaxScores.add(boundedMinimax(boardStateAfterMove,
                 player1TurnAfterMove, 1, maxDepth))
         }
@@ -293,12 +295,12 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     private fun boundedMinimaxMoveAlphaBeta(maxDepth: Int): Int {
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
-            if (boardState[i] != 0) possibleMoves.add(i)
+            if (boardState.value[i] != 0) possibleMoves.add(i)
         }
         val minimaxScores = mutableListOf<Int>()
         for (move in possibleMoves) {
-            val boardStateAfterMove = moveStones(move, boardState.toMutableList())
-            val player1TurnAfterMove = !checkMoveAgain(move, boardState.toMutableList())
+            val boardStateAfterMove = moveStones(move, boardState.value.toMutableList())
+            val player1TurnAfterMove = !checkMoveAgain(move, boardState.value.toMutableList())
             minimaxScores.add(boundedMinimaxAlphaBeta(boardStateAfterMove,
                 player1TurnAfterMove, 1, maxDepth, -49, 49))
         }
