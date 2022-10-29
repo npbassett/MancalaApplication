@@ -28,48 +28,63 @@ class MancalaSinglePlayerViewModel : ViewModel() {
     private val _player1Pockets = listOf(0, 1, 2, 3, 4, 5)
     private val _player2Pockets = listOf(7, 8, 9, 10, 11, 12)
 
+    /**
+     * Re-initializes values to restart the game
+     */
     fun restartGame() {
         _boardState.value = mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0)
         _player1Turn.value = true
         _gameOver.value = false
     }
 
+    /**
+     * Checks if player 1 (human) is the winner by determining whether player 1 has more stones in
+     * their store than player 2 (AI)
+     *
+     * @return true if player 1 is the winner
+     */
     fun checkPlayer1Winner(): Boolean {
         return boardState.value[6] > boardState.value[13]
     }
 
+    /**
+     * Checks if the game is a tie by determining whether player 1 (human) and player 2 (AI) have
+     * equal number of stones in their stores
+     *
+     * @return true if game is a tie
+     */
     fun checkTie(): Boolean {
         return boardState.value[6] == boardState.value[13]
     }
 
+    /**
+     * Checks whether selected pocket is not on the current player's side of the board
+     *
+     * @param pocket location of pocket on the board
+     * @return true if selected pocket is on wrong side of board
+     */
     fun pocketWrongSide(pocket: Int): Boolean {
         return (player1Turn.value && pocket in _player2Pockets) ||
                 (!player1Turn.value && pocket in _player1Pockets)
     }
 
+    /**
+     * Checks whether selected pocket is empty
+     *
+     * @param pocket location of pocket on the board
+     * @return true if pocket is empty
+     */
     fun pocketEmpty(pocket: Int): Boolean {
         return _boardState.value[pocket] == 0
     }
 
-    fun applyMove(pocket: Int) {
-        val boardStateBeforeMove = boardState.value.toMutableList()
-        _player1Turn.value = if (checkMoveAgain(pocket, boardStateBeforeMove)) {
-            player1Turn.value
-        } else !player1Turn.value
-        _boardState.value = moveStones(pocket, boardStateBeforeMove)
-        _gameOver.value = checkGameOver(boardState.value)
-        if (gameOver.value) {
-            for (i in 0..5) {
-                _boardState.value[6] += _boardState.value[i]
-                _boardState.value[i] = 0
-            }
-            for (i in 7..12) {
-                _boardState.value[13] += _boardState.value[i]
-                _boardState.value[i] = 0
-            }
-        }
-    }
-
+    /**
+     * Assesses a potential move
+     *
+     * @param pocket location of pocket on the board that has been selected for the move
+     * @param currentBoardState board state before the move
+     * @return board state after the move
+     */
     private fun moveStones(pocket: Int, currentBoardState: MutableList<Int>): MutableList<Int> {
         val currentPlayer1Turn = pocket in listOf(0, 1, 2, 3, 4, 5)
         val playersStore = if (currentPlayer1Turn) 6 else 13
@@ -103,12 +118,52 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return currentBoardState
     }
 
+    /**
+     * Updates the board state by moving stones from the selected pocket
+     *
+     * @param pocket location of pocket on the board
+     */
+    fun applyMove(pocket: Int) {
+        val boardStateBeforeMove = boardState.value.toMutableList()
+        _player1Turn.value = if (checkMoveAgain(pocket, boardStateBeforeMove)) {
+            player1Turn.value
+        } else !player1Turn.value
+        _boardState.value = moveStones(pocket, boardStateBeforeMove)
+        _gameOver.value = checkGameOver(boardState.value)
+        if (gameOver.value) {
+            for (i in 0..5) {
+                _boardState.value[6] += _boardState.value[i]
+                _boardState.value[i] = 0
+            }
+            for (i in 7..12) {
+                _boardState.value[13] += _boardState.value[i]
+                _boardState.value[i] = 0
+            }
+        }
+    }
+
+    /**
+     * Checks whether the last stone from a given move will land in the player's store, giving the
+     * player another turn
+     *
+     * @param pocket location of pocket on the board that has been selected for the move
+     * @param currentBoardState board state before the move
+     *
+     * @return true if current player gets another turn
+     */
     private fun checkMoveAgain(pocket: Int, currentBoardState: MutableList<Int>): Boolean {
         val currentPlayer1Turn = pocket in listOf(0, 1, 2, 3, 4, 5)
         val lastPocket = (pocket + currentBoardState[pocket]) % 14
         return (currentPlayer1Turn && lastPocket == 6) || (!currentPlayer1Turn && lastPocket == 13)
     }
 
+    /**
+     * checks whether bottom half of board (player 1's side) is empty
+     *
+     * @param currentBoardState board state describing number of stones in each pocket/store
+     *
+     * @return true if bottom half of board is empty
+     */
     private fun checkBottomEmpty(currentBoardState: List<Int>): Boolean {
         for (i in 0..5) {
             if (currentBoardState[i] != 0) {
@@ -118,6 +173,13 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return true
     }
 
+    /**
+     * checks whether top half of board (player 2's side) is empty
+     *
+     * @param currentBoardState board state describing number of stones in each pocket/store
+     *
+     * @return true if top half of board is empty
+     */
     private fun checkTopEmpty(currentBoardState: List<Int>): Boolean {
         for (i in 7..12) {
             if (currentBoardState[i] != 0) {
@@ -127,10 +189,21 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return true
     }
 
+    /**
+     * Checks if game is over if either top or bottom side of board is empty
+     *
+     * @return true if game is over
+     */
     private fun checkGameOver(currentBoardState: List<Int>): Boolean {
         return checkBottomEmpty(currentBoardState) || checkTopEmpty(currentBoardState)
     }
 
+    /**
+     * Gives opposite pocket on the board
+     *
+     * @param pocket pocket selected
+     * @return opposite pocket or null if store was selected
+     */
     private fun oppositePocket(pocket: Int): Int? {
         return if (pocket == 6 || pocket == 13) {
             null
@@ -139,6 +212,9 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Performs AI's move based on difficulty level selected by user
+     */
     fun aiMoveStones() {
         if (!_player1Turn.value) {
             when (aiDifficulty) {
@@ -149,6 +225,11 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Selects a move by randomly choosing a non-empty pocket
+     *
+     * @return pocket selected for the move
+     */
     private fun randomMove(): Int {
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
@@ -159,10 +240,21 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return possibleMoves[randomIndex]
     }
 
+    /**
+     * Objective function used by minimax algorithm to select a move
+     *
+     * @return difference between stones in player 2 (AI) and player 1 (human) stores
+     */
     private fun evaluateBoard(currentBoardState: MutableList<Int>): Int {
         return currentBoardState[13] - currentBoardState[6]
     }
 
+    /**
+     * Selects move by maximizing objective function for a single move. Equivalent to minimax
+     * algorithm with depth 1
+     *
+     * @return pocket selected for the move
+     */
     private fun greedyMove(): Int {
         // always choose the move that adds the most stones to the player's store
         val possibleMoves = mutableListOf<Int>()
@@ -179,8 +271,21 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return possibleMoves[moveScores.indexOf(moveScores.max())]
     }
 
-    private fun boundedMinimax(currentBoardState: MutableList<Int>, currentPlayer1Turn: Boolean,
-                               currentDepth: Int, maxDepth: Int): Int {
+    /**
+     * Implements the minimax algorithm for selecting the AI's move
+     *
+     * @param currentBoardState board state describing number of stones in each pocket/store
+     * @param currentPlayer1Turn true if Player 1's turn
+     * @param currentDepth current depth of the move tree
+     * @param maxDepth maximum depth of the move tree
+     *
+     * @return evaluation of objective function for branch of the move tree
+     */
+    private fun boundedMinimax(
+        currentBoardState: MutableList<Int>,
+        currentPlayer1Turn: Boolean,
+        currentDepth: Int,
+        maxDepth: Int): Int {
         if (currentDepth == maxDepth) {
             return evaluateBoard(currentBoardState)
         } else if (checkGameOver(currentBoardState)) {
@@ -224,6 +329,13 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return bestScore
     }
 
+    /**
+     * Selects best move using the minimax algorithm
+     *
+     * @param maxDepth maximum depth of tree for minimax algorithm to search
+     *
+     * @return pocket selected for the move
+     */
     private fun boundedMinimaxMove(maxDepth: Int): Int {
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {
@@ -239,9 +351,25 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return possibleMoves[minimaxScores.indexOf(minimaxScores.max())]
     }
 
-    private fun boundedMinimaxAlphaBeta(currentBoardState: MutableList<Int>,
-                                        currentPlayer1Turn: Boolean, currentDepth: Int,
-                                        maxDepth: Int, inputAlpha: Int, inputBeta: Int): Int {
+    /**
+     * Implements the minimax algorithm with alpha-beta pruning for selecting the AI's move
+     *
+     * @param currentBoardState board state describing number of stones in each pocket/store
+     * @param currentPlayer1Turn true if Player 1's turn
+     * @param currentDepth current depth of the move tree
+     * @param maxDepth maximum depth of the move tree
+     * @param inputAlpha minimum score that the maximizing player is guaranteed to receive
+     * @param inputBeta maximum score that the minimizing player is guaranteed to receive
+     *
+     * @return result of evaluating the objective function for branch of the move tree
+     */
+    private fun boundedMinimaxAlphaBeta(
+        currentBoardState: MutableList<Int>,
+        currentPlayer1Turn: Boolean,
+        currentDepth: Int,
+        maxDepth: Int,
+        inputAlpha: Int,
+        inputBeta: Int): Int {
         var alpha = inputAlpha
         var beta = inputBeta
         if (currentDepth == maxDepth) {
@@ -292,6 +420,13 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         return bestScore
     }
 
+    /**
+     * Selects best move using the minimax algorithm with alpha-beta pruning
+     *
+     * @param maxDepth maximum depth of move tree for minimax algorithm to search
+     *
+     * @return pocket selected for the move
+     */
     private fun boundedMinimaxMoveAlphaBeta(maxDepth: Int): Int {
         val possibleMoves = mutableListOf<Int>()
         for (i in 7..12) {

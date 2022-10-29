@@ -53,6 +53,12 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         return binding.root
     }
 
+    /**
+     * Selects image for pocket with correct number of stones
+     *
+     * @param numStones number of stones in the pocket
+     * @return ID of image
+     */
     private fun getPocketImage(numStones: Int): Int {
         return if (numStones in 0..14) {
             resources.getIdentifier("pocket_${numStones}_stones",
@@ -63,6 +69,12 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         }
     }
 
+    /**
+     * Selects image for store with correct number of stones
+     *
+     * @param numStones number of stones in the store
+     * @return ID of image
+     */
     private fun getStoreImage(numStones: Int): Int {
         return if (numStones in 0..35) {
             resources.getIdentifier("store_${numStones}_stones",
@@ -90,6 +102,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         binding.btnPocket12.setOnClickListener { onButtonClick(12) }
     }
 
+    /**
+     * Makes a snackbar to alert the player that they selected pocket on wrong side of board
+     */
     private fun wrongSideSnackbar() {
         activity?.let { it ->
             Snackbar.make(
@@ -101,6 +116,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         return
     }
 
+    /**
+     * Makes a snackbar to alert the player that they selected an empty pocket
+     */
     private fun emptyPocketSnackbar() {
         activity?.let { it ->
             Snackbar.make(
@@ -112,6 +130,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         return
     }
 
+    /**
+     * Makes a snackbar to alert the player that they get to move again
+     */
     private fun moveAgainSnackbar() {
         activity?.let { it ->
             Snackbar.make(
@@ -123,6 +144,10 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         return
     }
 
+    /**
+     * When player clicks a button on the board, either makes a snackbar if pocket invalid or
+     * performs the move if pocket is valid
+     */
     private fun onButtonClick(pocket: Int) {
         if (viewModel.pocketWrongSide(pocket)) {
             wrongSideSnackbar()
@@ -147,6 +172,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         }
     }
 
+    /**
+     * Alerts players to the winner and final score when game is over
+     */
     private fun showGameOverDialog() {
         MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialog).apply {
             if (viewModel.checkTie()) {
@@ -174,6 +202,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         }
     }
 
+    /**
+     * Disables all buttons (to be used while AI opponent is moving)
+     */
     private fun disableButtons() {
         binding.btnPocket0.isEnabled = false
         binding.btnPocket1.isEnabled = false
@@ -189,6 +220,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         binding.btnPocket12.isEnabled = false
     }
 
+    /**
+     * Enables all buttons
+     */
     private fun enableButtons() {
         binding.btnPocket0.isEnabled = true
         binding.btnPocket1.isEnabled = true
@@ -204,6 +238,9 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         binding.btnPocket12.isEnabled = true
     }
 
+    /**
+     * Uses StateFlows to update UI when values change
+     */
     private fun subscribeToObservables() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

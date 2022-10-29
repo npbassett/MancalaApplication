@@ -51,6 +51,9 @@ class DashboardActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * Uses MaterialAlertDialog to show rules of the game to the user
+     */
     private fun showRules() {
         MaterialAlertDialogBuilder(this, R.style.AlertDialog)
             .setTitle("Mancala Rules")
