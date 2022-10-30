@@ -1,17 +1,17 @@
 package com.example.mancalaapplication
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.mancalaapplication.databinding.MancalaFragmentBinding
@@ -32,23 +32,33 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
         }
     }
 
-    private val viewModel: MancalaSinglePlayerViewModel by viewModels()
-
     private lateinit var aiDifficulty: String
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        arguments?.getString("AI difficulty")?.let {
-            aiDifficulty = it
-        }
-        viewModel.aiDifficulty = aiDifficulty
-    }
-
+    private lateinit var viewModel: MancalaSinglePlayerViewModel
     private lateinit var binding: MancalaFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+
+        // gets the AI difficulty passed from DashboardActivity
+        arguments?.getString("AI difficulty")?.let {
+            aiDifficulty = it
+        }
+
+        // instantiates viewModel, passing aiDifficulty and database repository
+        val viewModelFactory = MancalaSinglePlayerViewModelFactory(
+            aiDifficulty,
+            (activity?.application as MancalaApplication).repository
+        )
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        )[MancalaSinglePlayerViewModel::class.java]
+
+        //viewModel.gameOutcomes.observe(viewLifecycleOwner) {gameOutcomes ->
+        //    gameOutcomes.let { Log.d("single player", "${gameOutcomes.size}") }
+        //}
+
         binding = MancalaFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -64,7 +74,7 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             resources.getIdentifier("pocket_${numStones}_stones",
                 "drawable", context?.packageName)
         } else {
-            resources.getIdentifier("pocket_35_stones",
+            resources.getIdentifier("pocket_14_stones",
                 "drawable", context?.packageName)
         }
     }
@@ -203,6 +213,18 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     /**
+     * inserts outcome of game into database
+     */
+    private fun addGameToDatabase() {
+        viewModel.insertGameOutcome(GameOutcome(
+            0,
+            System.currentTimeMillis().toInt(),
+            "single player",
+            aiDifficulty,
+            viewModel.checkPlayer1Winner()))
+    }
+
+    /**
      * Disables all buttons (to be used while AI opponent is moving)
      */
     private fun disableButtons() {
@@ -297,7 +319,10 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
                 }
                 launch {
                     viewModel.gameOver.collectLatest {
-                        if (it) showGameOverDialog()
+                        if (it) {
+                            addGameToDatabase()
+                            showGameOverDialog()
+                        }
                     }
                 }
             }

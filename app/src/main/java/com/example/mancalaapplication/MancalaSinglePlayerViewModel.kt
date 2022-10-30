@@ -1,19 +1,32 @@
 package com.example.mancalaapplication
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.random.Random
 
-class MancalaSinglePlayerViewModel : ViewModel() {
-    var aiDifficulty = ""
-        set(value) {
-            (if (value in listOf("easy", "intermediate", "hard")) value
-                else throw java.lang.IllegalArgumentException(
-                "Difficulty must be either easy, intermediate, or hard.")).also { field = it }
-        }
+class MancalaSinglePlayerViewModel(
+    private val aiDifficulty: String,
+    private val repository: GameOutcomeRepository) : ViewModel() {
+
+    //val gameOutcomes: LiveData<List<GameOutcome>> = repository.allGameOutcomes.asLiveData()
+
+    /**
+     * launches a new coroutine to insert a game outcome into the database
+     */
+    fun insertGameOutcome(gameOutcome: GameOutcome) = viewModelScope.launch {
+        repository.insert(gameOutcome)
+    }
+
+    /**
+     * launches a new coroutine to delete all game outcomes stored in database
+     */
+    fun deleteAllGameOutcomes() = viewModelScope.launch {
+        repository.deleteAll()
+    }
 
     private val _boardState = MutableStateFlow(
         mutableListOf(4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0))
@@ -115,6 +128,16 @@ class MancalaSinglePlayerViewModel : ViewModel() {
             currentBoardState[playersStore] += currentBoardState[lastPocketOpposite]
             currentBoardState[lastPocketOpposite] = 0
         }
+        if (checkGameOver(currentBoardState)) {
+            for (i in 0..5) {
+                currentBoardState[6] += currentBoardState[i]
+                currentBoardState[i] = 0
+            }
+            for (i in 7..12) {
+                currentBoardState[13] += currentBoardState[i]
+                currentBoardState[i] = 0
+            }
+        }
         return currentBoardState
     }
 
@@ -130,16 +153,16 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         } else !player1Turn.value
         _boardState.value = moveStones(pocket, boardStateBeforeMove)
         _gameOver.value = checkGameOver(boardState.value)
-        if (gameOver.value) {
-            for (i in 0..5) {
-                _boardState.value[6] += _boardState.value[i]
-                _boardState.value[i] = 0
-            }
-            for (i in 7..12) {
-                _boardState.value[13] += _boardState.value[i]
-                _boardState.value[i] = 0
-            }
-        }
+        //if (checkGameOver(boardState.value)) {
+        //    for (i in 0..5) {
+        //        _boardState.value[6] += _boardState.value[i]
+        //        _boardState.value[i] = 0
+        //    }
+        //    for (i in 7..12) {
+        //        _boardState.value[13] += _boardState.value[i]
+        //        _boardState.value[i] = 0
+        //    }
+        //}
     }
 
     /**
@@ -441,5 +464,19 @@ class MancalaSinglePlayerViewModel : ViewModel() {
         }
         return possibleMoves[minimaxScores.indexOf(minimaxScores.max())]
     }
+}
 
+class MancalaSinglePlayerViewModelFactory(
+    private val aiDifficulty: String,
+    private val repository: GameOutcomeRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (aiDifficulty in listOf("easy", "intermediate", "hard")) {
+            if (modelClass.isAssignableFrom(MancalaSinglePlayerViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MancalaSinglePlayerViewModel(aiDifficulty, repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+        throw IllegalArgumentException("aiDifficulty must be either easy, intermediate, or hard")
+    }
 }
