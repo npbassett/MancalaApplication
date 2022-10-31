@@ -19,6 +19,11 @@ class DashboardActivity: AppCompatActivity() {
             showRules()
         }
 
+        val btnStats = findViewById<ImageButton>(R.id.btnStats)
+        btnStats.setOnClickListener {
+            showGameStats()
+        }
+
         val btnBeginMultiplayer = findViewById<Button>(R.id.btnBeginMultiplayer)
         btnBeginMultiplayer.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -49,6 +54,13 @@ class DashboardActivity: AppCompatActivity() {
             intent.putExtra("AI difficulty", "hard")
             startActivity(intent)
         }
+    }
+
+    /**
+     * Shows user statistics about number of games played and win percentage
+     */
+    private fun showGameStats() {
+        GameStatsDialogFragment().show(supportFragmentManager, "GameStatsDialog")
     }
 
     /**

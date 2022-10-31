@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AlertDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="?dialogPreferredPadding">
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/stats_title"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotalGamesPlayed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvTotalGamesPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/total_games_played"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/tvSinglePlayerGamesPlayed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvSinglePlayerGamesPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/single_player_games_played"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/tvEasyGamesWon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalGamesPlayed" />
+
+    <TextView
+        android:id="@+id/tvEasyGamesWon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/easy_games_won"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/tvIntermediateGamesWon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSinglePlayerGamesPlayed" />
+
+    <TextView
+        android:id="@+id/tvIntermediateGamesWon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/intermediate_games_won"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/tvHardGamesWon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEasyGamesWon" />
+
+    <TextView
+        android:id="@+id/tvHardGamesWon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/hard_games_won"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toTopOf="@+id/tvMultiplayerGamesPlayed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvIntermediateGamesWon" />
+
+    <TextView
+        android:id="@+id/tvMultiplayerGamesPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/multiplayer_games_played"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/accent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHardGamesWon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

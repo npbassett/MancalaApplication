@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,10 +53,6 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
             this,
             viewModelFactory
         )[MancalaSinglePlayerViewModel::class.java]
-
-        //viewModel.gameOutcomes.observe(viewLifecycleOwner) {gameOutcomes ->
-        //    gameOutcomes.let { Log.d("single player", "${gameOutcomes.size}") }
-        //}
 
         binding = MancalaFragmentBinding.inflate(inflater, container, false)
         return binding.root

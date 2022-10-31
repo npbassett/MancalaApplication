@@ -12,8 +12,6 @@ class MancalaSinglePlayerViewModel(
     private val aiDifficulty: String,
     private val repository: GameOutcomeRepository) : ViewModel() {
 
-    //val gameOutcomes: LiveData<List<GameOutcome>> = repository.allGameOutcomes.asLiveData()
-
     /**
      * launches a new coroutine to insert a game outcome into the database
      */
@@ -153,16 +151,6 @@ class MancalaSinglePlayerViewModel(
         } else !player1Turn.value
         _boardState.value = moveStones(pocket, boardStateBeforeMove)
         _gameOver.value = checkGameOver(boardState.value)
-        //if (checkGameOver(boardState.value)) {
-        //    for (i in 0..5) {
-        //        _boardState.value[6] += _boardState.value[i]
-        //        _boardState.value[i] = 0
-        //    }
-        //    for (i in 7..12) {
-        //        _boardState.value[13] += _boardState.value[i]
-        //        _boardState.value[i] = 0
-        //    }
-        //}
     }
 
     /**

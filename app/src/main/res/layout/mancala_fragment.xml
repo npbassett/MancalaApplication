@@ -149,7 +149,7 @@
                 android:id="@+id/btnPocket6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/pocket_4_stones"
+                android:background="@drawable/store_0_stones"
                 android:clickable="true"
                 android:focusable="true"
                 android:contentDescription="@string/board_button_description" />
@@ -297,7 +297,7 @@
                 android:id="@+id/btnPocket13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/pocket_4_stones"
+                android:background="@drawable/store_0_stones"
                 android:clickable="true"
                 android:focusable="true"
                 android:contentDescription="@string/board_button_description" />

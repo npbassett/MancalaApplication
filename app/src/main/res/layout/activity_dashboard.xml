@@ -16,11 +16,21 @@
         android:id="@+id/btnRules"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:backgroundTint="@color/primary"
         android:src="@drawable/ic_baseline_info_40"
-        android:contentDescription="@string/info"/>
+        android:contentDescription="@string/info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btnStats"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/primary"
+        android:src="@drawable/ic_baseline_leaderboard_40"
+        android:contentDescription="@string/stats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivLogo"

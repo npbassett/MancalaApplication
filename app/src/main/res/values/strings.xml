@@ -2,6 +2,7 @@
     <string name="app_name">Mancala</string>
     <string name="logo">logo</string>
     <string name="info">info vector image</string>
+    <string name="stats">stats vector image</string>
     <string name="welcome">Welcome to Mancala!</string>
     <string name="begin_multiplayer">Begin Multiplayer Game</string>
     <string name="dashboard_multiplayer_button">Begin</string>
@@ -26,4 +27,11 @@
     <string name="move_again_snackbar">Last stone was placed in your store. Move again!</string>
     <string name="dismiss">DISMISS</string>
     <string name="lets_play">Let\'s Play!</string>
+    <string name="stats_title">Mancala Statistics</string>
+    <string name="total_games_played">Total games played: %d</string>
+    <string name="single_player_games_played">Single player games played: %d</string>
+    <string name="multiplayer_games_played">Multiplayer games played: %d</string>
+    <string name="easy_games_won">Easy difficulty: won %d</string>
+    <string name="intermediate_games_won">Intermediate difficulty: won %d</string>
+    <string name="hard_games_won">Hard difficulty: won %d</string>
 </resources>

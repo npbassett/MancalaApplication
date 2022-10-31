@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.mancalaapplication.databinding.MancalaFragmentBinding
@@ -20,13 +20,22 @@ import kotlinx.coroutines.launch
 
 class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
 
-    private val viewModel: MancalaMultiplayerViewModel by viewModels()
-
+    private lateinit var viewModel: MancalaMultiplayerViewModel
     private lateinit var binding: MancalaFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+
+        // instantiates viewModel, passing database repository
+        val viewModelFactory = MancalaMultiplayerViewModelFactory(
+            (activity?.application as MancalaApplication).repository
+        )
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        )[MancalaMultiplayerViewModel::class.java]
+
         binding = MancalaFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -172,6 +181,18 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     /**
+     * inserts outcome of game into database
+     */
+    private fun addGameToDatabase() {
+        viewModel.insertGameOutcome(GameOutcome(
+            0,
+            System.currentTimeMillis().toInt(),
+            "multiplayer",
+            null,
+            viewModel.checkPlayer1Winner()))
+    }
+
+    /**
      * Uses StateFlows to update UI when values change
      */
     private fun subscribeToObservables() {
@@ -231,7 +252,10 @@ class MancalaMultiplayerFragment : Fragment(R.layout.mancala_fragment) {
                 }
                 launch {
                     viewModel.gameOver.collectLatest {
-                        if (it) showGameOverDialog()
+                        if (it) {
+                            addGameToDatabase()
+                            showGameOverDialog()
+                        }
                     }
                 }
             }
