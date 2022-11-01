@@ -1,6 +1,9 @@
 package com.example.mancalaapplication
 
 import android.content.Intent
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -220,21 +223,49 @@ class MancalaSinglePlayerFragment : Fragment(R.layout.mancala_fragment) {
     }
 
     /**
+     * reduces saturation of image to 80%
+     *
+     * @param drawable
+     * @return drawable with saturation reduced
+     */
+    private fun desaturateDrawable(drawable: Drawable): Drawable {
+        val grayScaleMatrix = ColorMatrix()
+        grayScaleMatrix.setSaturation(0.80.toFloat())
+        val newDrawable = drawable.mutate()
+        newDrawable.colorFilter = ColorMatrixColorFilter(grayScaleMatrix)
+        return newDrawable
+    }
+
+    /**
      * Disables all buttons (to be used while AI opponent is moving)
      */
     private fun disableButtons() {
         binding.btnPocket0.isEnabled = false
+        binding.btnPocket0.background = desaturateDrawable(binding.btnPocket0.background)
         binding.btnPocket1.isEnabled = false
+        binding.btnPocket1.background = desaturateDrawable(binding.btnPocket1.background)
         binding.btnPocket2.isEnabled = false
+        binding.btnPocket2.background = desaturateDrawable(binding.btnPocket2.background)
         binding.btnPocket3.isEnabled = false
+        binding.btnPocket3.background = desaturateDrawable(binding.btnPocket3.background)
         binding.btnPocket4.isEnabled = false
+        binding.btnPocket4.background = desaturateDrawable(binding.btnPocket4.background)
         binding.btnPocket5.isEnabled = false
+        binding.btnPocket5.background = desaturateDrawable(binding.btnPocket5.background)
+        binding.btnPocket6.background = desaturateDrawable(binding.btnPocket6.background)
         binding.btnPocket7.isEnabled = false
+        binding.btnPocket7.background = desaturateDrawable(binding.btnPocket7.background)
         binding.btnPocket8.isEnabled = false
+        binding.btnPocket8.background = desaturateDrawable(binding.btnPocket8.background)
         binding.btnPocket9.isEnabled = false
+        binding.btnPocket9.background = desaturateDrawable(binding.btnPocket9.background)
         binding.btnPocket10.isEnabled = false
+        binding.btnPocket10.background = desaturateDrawable(binding.btnPocket10.background)
         binding.btnPocket11.isEnabled = false
+        binding.btnPocket11.background = desaturateDrawable(binding.btnPocket11.background)
         binding.btnPocket12.isEnabled = false
+        binding.btnPocket12.background = desaturateDrawable(binding.btnPocket12.background)
+        binding.btnPocket13.background = desaturateDrawable(binding.btnPocket13.background)
     }
 
     /**
