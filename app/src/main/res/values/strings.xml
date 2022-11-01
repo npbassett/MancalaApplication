@@ -31,7 +31,7 @@
     <string name="total_games_played">Total games played: %d</string>
     <string name="single_player_games_played">Single player games played: %d</string>
     <string name="multiplayer_games_played">Multiplayer games played: %d</string>
-    <string name="easy_games_won">Easy difficulty: won %d</string>
-    <string name="intermediate_games_won">Intermediate difficulty: won %d</string>
-    <string name="hard_games_won">Hard difficulty: won %d</string>
+    <string name="easy_games_won">Easy difficulty: %d/%d (%.1f%%)</string>
+    <string name="intermediate_games_won">Intermediate difficulty: %d/%d (%.1f%%)</string>
+    <string name="hard_games_won">Hard difficulty: %d/%d (%.1f%%)</string>
 </resources>

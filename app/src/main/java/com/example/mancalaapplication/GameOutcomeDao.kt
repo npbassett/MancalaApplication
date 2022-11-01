@@ -15,22 +15,28 @@ interface GameOutcomeDao {
     @Query("SELECT * FROM game_outcome_table WHERE game_type = 'single player'")
     fun getSinglePlayerGameOutcomes(): Flow<List<GameOutcome>>
 
-    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player' AND difficulty = 'easy'")
+    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player'" +
+            " AND difficulty = 'easy'")
     fun getEasyGamesTotal(): Flow<Int>
 
-    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player' AND difficulty = 'easy' AND player_1_winner = 'true'")
+    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player'" +
+            " AND difficulty = 'easy' AND player_1_winner")
     fun getEasyGamesWon(): Flow<Int>
 
-    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player' AND difficulty = 'intermediate'")
+    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player'" +
+            " AND difficulty = 'intermediate'")
     fun getIntermediateGamesTotal(): Flow<Int>
 
-    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player' AND difficulty = 'intermediate' AND player_1_winner = 'true'")
+    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player'" +
+            " AND difficulty = 'intermediate' AND player_1_winner = 'true'")
     fun getIntermediateGamesWon(): Flow<Int>
 
-    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player' AND difficulty = 'hard'")
+    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player'" +
+            " AND difficulty = 'hard'")
     fun getHardGamesTotal(): Flow<Int>
 
-    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player' AND difficulty = 'hard' AND player_1_winner = 'true'")
+    @Query("SELECT count(*) FROM game_outcome_table WHERE game_type = 'single player'" +
+            " AND difficulty = 'hard' AND player_1_winner = 'true'")
     fun getHardGamesWon(): Flow<Int>
 
     @Query("SELECT * FROM game_outcome_table WHERE game_type = 'multiplayer'")

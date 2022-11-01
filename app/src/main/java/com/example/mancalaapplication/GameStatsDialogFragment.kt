@@ -46,9 +46,9 @@ class GameStatsDialogFragment : DialogFragment() {
 
         observeAllGameOutcomes()
         observeSinglePlayerGameOutcomes()
-        observeEasyGamesWon()
-        observeIntermediateGamesWon()
-        observeHardGamesWon()
+        observeEasyGames()
+        observeIntermediateGames()
+        observeHardGames()
         observeMultiplayerGameOutcomes()
 
         return view
@@ -74,33 +74,65 @@ class GameStatsDialogFragment : DialogFragment() {
                 }
         }
 
-    private fun observeEasyGamesWon() =
-        viewModel.easyGamesWon.observe(this) { easyGamesWon ->
+    private fun observeEasyGames() =
+        viewModel.easyGames.observe(this) { (easyGamesTotal, easyGamesWon) ->
             easyGamesWonView.text =
-                if (easyGamesWon != null) {
-                    getString(R.string.easy_games_won, easyGamesWon)
+                if (easyGamesTotal != null ) {
+                    if (easyGamesWon != null) {
+                        val percentage = if (easyGamesTotal == 0) {
+                            0.0
+                        } else {
+                            (easyGamesWon.toDouble() / easyGamesTotal) * 100
+                        }
+                        getString(R.string.easy_games_won, easyGamesWon, easyGamesTotal, percentage)
+                    } else {
+                        getString(R.string.easy_games_won, 0, easyGamesTotal, 0.0)
+                    }
                 } else {
-                    getString(R.string.easy_games_won, 0)
+                    getString(R.string.easy_games_won, 0, 0, 0.0)
                 }
         }
 
-    private fun observeIntermediateGamesWon() =
-        viewModel.intermediateGamesWon.observe(this) { intermediateGamesWon ->
+    private fun observeIntermediateGames() =
+        viewModel.intermediateGames.observe(this) {
+                (intermediateGamesTotal, intermediateGamesWon) ->
             intermediateGamesWonView.text =
-                if (intermediateGamesWon != null) {
-                    getString(R.string.intermediate_games_won, intermediateGamesWon)
+                if (intermediateGamesTotal != null) {
+                    if (intermediateGamesWon != null) {
+                        val percentage = if (intermediateGamesTotal == 0) {
+                            0.0
+                        } else {
+                            (intermediateGamesWon.toDouble() / intermediateGamesTotal) * 100
+                        }
+                        getString(
+                            R.string.intermediate_games_won,
+                            intermediateGamesWon, intermediateGamesTotal, percentage
+                        )
+                    } else {
+                        getString(R.string.intermediate_games_won,
+                            0, intermediateGamesTotal, 0.0)
+                    }
                 } else {
-                    getString(R.string.intermediate_games_won, 0)
+                    getString(R.string.intermediate_games_won, 0, 0, 0.0)
                 }
         }
 
-    private fun observeHardGamesWon() =
-        viewModel.hardGamesWon.observe(this) { hardGamesWon ->
+    private fun observeHardGames() =
+        viewModel.hardGames.observe(this) { (hardGamesTotal, hardGamesWon) ->
             hardGamesWonView.text =
-                if (hardGamesWon != null) {
-                    getString(R.string.hard_games_won, hardGamesWon)
+                if (hardGamesTotal != null ) {
+                    if (hardGamesWon != null) {
+                        val percentage = if (hardGamesTotal == 0) {
+                            0.0
+                        } else {
+                            (hardGamesWon.toDouble() / hardGamesTotal) * 100
+                        }
+                        getString(R.string.hard_games_won, hardGamesWon, hardGamesTotal, percentage)
+                    } else {
+                        getString(R.string.hard_games_won, 0, hardGamesTotal, 0.0)
+                    }
                 } else {
-                    getString(R.string.hard_games_won, 0)
+                    getString(R.string.hard_games_won, 0, 0, 0.0)
                 }
         }
 
