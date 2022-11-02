@@ -15,5 +15,7 @@ Android application to play the game mancala. This app was created by Neil Basse
 - Keeps tracks of statistics including games played and win percentage
 
 ## Screenshots
-<img src="/readme/mancala_app_homepage_screenshot.png" width="400" hspace="10" align="left">
-<img src="/readme/mancala_app_gameplay_screenshot.png" width="400" hspace="10" align="left">
+A [one minute demo](https://youtu.be/T_r8MDkmW5E) is available on Youtube.
+
+<img src="/readme/mancala_app_homepage_screenshot.png" width="250" hspace="10" align="left">
+<img src="/readme/mancala_app_gameplay_screenshot.png" width="250" hspace="10" align="left">
